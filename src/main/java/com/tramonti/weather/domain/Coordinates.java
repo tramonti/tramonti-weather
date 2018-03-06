@@ -6,10 +6,13 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class Sys {
+public class Coordinates {
 
-    @SerializedName("pod")
+    @SerializedName("lat")
     @Expose
-    public String pod;
+    public Double latitude;
+    @SerializedName("lon")
+    @Expose
+    public Double longitude;
 
 }

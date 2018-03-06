@@ -20,17 +20,8 @@ public class Main {
     @SerializedName("pressure")
     @Expose
     public Double pressure;
-    @SerializedName("sea_level")
-    @Expose
-    public Double seaLevel;
-    @SerializedName("grnd_level")
-    @Expose
-    public Double grndLevel;
     @SerializedName("humidity")
     @Expose
     public Integer humidity;
-    @SerializedName("temp_kf")
-    @Expose
-    public Double tempKf;
 
 }

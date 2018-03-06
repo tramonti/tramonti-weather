@@ -19,7 +19,7 @@ public class City {
     public String name;
     @SerializedName("coord")
     @Expose
-    public Coord coord;
+    public Coordinates coordinates;
     @SerializedName("country")
     @Expose
     public String country;

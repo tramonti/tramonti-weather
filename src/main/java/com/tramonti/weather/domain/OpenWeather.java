@@ -5,26 +5,22 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class OpenWeather {
 
     @SerializedName("cod")
     @Expose
-    public String cod;
+    public String statusCode;
     @SerializedName("message")
     @Expose
-    public Double message;
-    @SerializedName("cnt")
-    @Expose
-    public Integer cnt;
+    public String message;
     @SerializedName("list")
     @Expose
-    public java.util.List<com.tramonti.weather.domain.List> list = null;
+    public List<WeatherList> weatherList = null;
     @SerializedName("city")
     @Expose
     public City city;
 
-    public static void main(String[] args) {
-
-    }
 }
