@@ -1,16 +1,10 @@
 package com.tramonti.weather.domain;
 
+import lombok.Data;
+
 //TODO: define toString, constructors etc, getters setter using Lombok
+@Data
 public class User {
 	private String username;
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
+	private String password;
 }
