@@ -10,27 +10,27 @@ public class Main {
 
     @SerializedName("temp")
     @Expose
-    public Float temp;
+    public Double temp;
     @SerializedName("temp_min")
     @Expose
-    public Float tempMin;
+    public Double tempMin;
     @SerializedName("temp_max")
     @Expose
-    public Float tempMax;
+    public Double tempMax;
     @SerializedName("pressure")
     @Expose
-    public Float pressure;
+    public Double pressure;
     @SerializedName("sea_level")
     @Expose
-    public Float seaLevel;
+    public Double seaLevel;
     @SerializedName("grnd_level")
     @Expose
-    public Float grndLevel;
+    public Double grndLevel;
     @SerializedName("humidity")
     @Expose
     public Integer humidity;
     @SerializedName("temp_kf")
     @Expose
-    public Integer tempKf;
+    public Double tempKf;
 
 }

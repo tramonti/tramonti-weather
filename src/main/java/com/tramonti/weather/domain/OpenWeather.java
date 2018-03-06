@@ -13,7 +13,7 @@ public class OpenWeather {
     public String cod;
     @SerializedName("message")
     @Expose
-    public Float message;
+    public Double message;
     @SerializedName("cnt")
     @Expose
     public Integer cnt;
