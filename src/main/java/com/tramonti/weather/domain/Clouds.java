@@ -10,6 +10,6 @@ public class Clouds {
 
     @SerializedName("all")
     @Expose
-    public Integer all;
+    private Integer all;
 
 }

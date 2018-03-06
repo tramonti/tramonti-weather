@@ -10,18 +10,18 @@ public class Main {
 
     @SerializedName("temp")
     @Expose
-    public Double temp;
+    private Double temp;
     @SerializedName("temp_min")
     @Expose
-    public Double tempMin;
+    private Double tempMin;
     @SerializedName("temp_max")
     @Expose
-    public Double tempMax;
+    private Double tempMax;
     @SerializedName("pressure")
     @Expose
-    public Double pressure;
+    private Double pressure;
     @SerializedName("humidity")
     @Expose
-    public Integer humidity;
+    private Integer humidity;
 
 }

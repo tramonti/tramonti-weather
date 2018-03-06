@@ -10,18 +10,18 @@ public class WeatherList {
 
     @SerializedName("main")
     @Expose
-    public Main main;
+    private Main main;
     @SerializedName("weather")
     @Expose
-    public java.util.List<Weather> weather = null;
+    private java.util.List<Weather> weather = null;
     @SerializedName("clouds")
     @Expose
-    public Clouds clouds;
+    private Clouds clouds;
     @SerializedName("wind")
     @Expose
-    public Wind wind;
+    private Wind wind;
     @SerializedName("dt_txt")
     @Expose
-    public String dateTxt;
+    private String dateTxt;
 
 }
