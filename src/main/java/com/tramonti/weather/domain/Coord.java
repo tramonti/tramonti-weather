@@ -10,9 +10,9 @@ public class Coord {
 
     @SerializedName("lat")
     @Expose
-    public Float lat;
+    public Double lat;
     @SerializedName("lon")
     @Expose
-    public Float lon;
+    public Double lon;
 
 }
