@@ -13,12 +13,12 @@ import java.util.List;
 /**
  * Created by tarashrynchuk on 3/1/18.
  */
-@RestController("users")
+@RestController()
 public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping
+	@GetMapping("/users")
 	public List<User> getAllUsers() {
 		return  userService.getUsers();
 	}
