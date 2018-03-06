@@ -12,15 +12,15 @@ public class OpenWeather {
 
     @SerializedName("cod")
     @Expose
-    public String statusCode;
+    private String statusCode;
     @SerializedName("message")
     @Expose
-    public String message;
+    private String message;
     @SerializedName("list")
     @Expose
-    public List<WeatherList> weatherList = null;
+    private List<WeatherList> weatherList = null;
     @SerializedName("city")
     @Expose
-    public City city;
+    private City city;
 
 }
