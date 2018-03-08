@@ -3,7 +3,9 @@ package com.tramonti.weather.repository;
 
 import com.google.gson.Gson;
 import com.tramonti.weather.domain.OpenWeather;
+import com.tramonti.weather.domain.WeatherException;
 import lombok.Cleanup;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -21,11 +23,13 @@ public class WeatherRepositoryImpl implements WeatherRepository {
             URL url = new URL(urlString);
             @Cleanup InputStreamReader reader = new InputStreamReader(url.openStream());
             openWeather = new Gson().fromJson(reader, OpenWeather.class);
-            System.out.println(openWeather);
         } catch (IOException e) {
-            openWeather = new OpenWeather();
-            openWeather.setStatusCode("404");
-            openWeather.setMessage("City not found");
+            throw new WeatherException()
+                    .setDescription("city not found")
+                    .setName("Illegal City Name")
+                    .setThrowable(e)
+                    .setLevel(WeatherException.Level.ERROR)
+                    .setStatus(HttpStatus.NOT_FOUND);
         }
         return openWeather;
     }
