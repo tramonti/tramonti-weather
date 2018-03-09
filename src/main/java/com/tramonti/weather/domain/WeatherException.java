@@ -42,6 +42,7 @@ public class WeatherException extends RuntimeException {
     }
 
     public enum Level {
-        FATAL, ERROR, INFO
+        FATAL, ERROR, WARNING, INFO
     }
+
 }
