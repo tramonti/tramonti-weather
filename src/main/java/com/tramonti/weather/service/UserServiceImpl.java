@@ -13,7 +13,7 @@ import java.util.List;
 	private UserRepository userRepository;
 
 	@Override
-	public List<User> getUsers() {
-		return userRepository.getUsers();
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 }
