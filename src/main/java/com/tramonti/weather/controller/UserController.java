@@ -20,7 +20,7 @@ public class UserController {
 
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
-		return  userService.getUsers();
+		return  userService.findAll();
 	}
 
 	//TODO: crud users operations
