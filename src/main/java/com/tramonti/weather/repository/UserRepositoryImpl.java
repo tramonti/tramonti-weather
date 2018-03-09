@@ -1,23 +1,24 @@
 package com.tramonti.weather.repository;
 
 import com.tramonti.weather.domain.User;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-	@Override
-	public List<User> getUsers() {
 
-		User user = new User();
-		user.setUsername("user 1");
+    private MongoTemplate mongoTemplate;
 
-		return asList(user);
+    @Autowired
+    public UserRepositoryImpl(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
 
-	}
+    @Override
+    public List<User> getUsers() {
+        return mongoTemplate.findAll(User.class);
+    }
 }
