@@ -16,4 +16,26 @@ import java.util.List;
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
+
+	@Override
+	public User find(String id) {
+		User user = new User();
+		user.setId(id);
+		return userRepository.find(user);
+	}
+
+	@Override
+	public User create(User user) {
+		return userRepository.create(user);
+	}
+
+	@Override
+	public User update(User user) {
+		return userRepository.update(user);
+	}
+
+	@Override
+	public User delete(User user) {
+		return userRepository.delete(user);
+	}
 }
