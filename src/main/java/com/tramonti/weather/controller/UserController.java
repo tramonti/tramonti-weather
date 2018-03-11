@@ -1,10 +1,9 @@
 package com.tramonti.weather.controller;
 
 import com.tramonti.weather.domain.User;
-import com.tramonti.weather.domain.WeatherException;
 import com.tramonti.weather.service.UserService;
+import com.tramonti.weather.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +15,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserValidator userValidator;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -35,39 +37,16 @@ public class UserController {
 
     @PostMapping(value = "/users/update", consumes = "application/json")
     public User updateUser(@RequestBody User user) {
-        if (user.getId() == null || user.getId().length() == 0) {
-            throw new WeatherException()
-                    .setDescription("user id cannot be empty")
-                    .setName("Null pointer")
-                    .setLevel(WeatherException.Level.WARNING)
-                    .setStatus(HttpStatus.BAD_REQUEST)
-                    .setThrowable(new NullPointerException());
-        }
+        userValidator.validateId(user);
         return userService.update(user);
     }
 
     @DeleteMapping(value = "/users", consumes = "application/json")
     public User deleteUser(@RequestBody User user) {
-        if (user.getId() == null || user.getId().length() == 0) {
-            throw new WeatherException()
-                    .setDescription("user id cannot be empty")
-                    .setName("Null pointer")
-                    .setLevel(WeatherException.Level.WARNING)
-                    .setStatus(HttpStatus.BAD_REQUEST)
-                    .setThrowable(new NullPointerException());
-        }
+        userValidator.validateId(user);
         User userToDelete = userService.find(user.getId());
-        if (user.equals(userToDelete)) {
-            return userService.delete(user);
-        } else {
-            throw new WeatherException()
-                    .setDescription("User with such parameters does not exist")
-                    .setStatus(HttpStatus.BAD_REQUEST)
-                    .setLevel(WeatherException.Level.WARNING)
-                    .setName("Validation rules")
-                    .setThrowable(new IllegalAccessError());
-        }
-
+        userValidator.validateAllUser(user, userToDelete);
+        return userService.delete(user);
     }
 
     //TODO: get user by  username and
