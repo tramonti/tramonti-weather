@@ -32,17 +32,20 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User create(User user) {
-        return mongoTemplate.insert(user);
+        mongoTemplate.insert(user);
+        return user;
     }
 
     @Override
     public User update(User user) {
-        return mongoTemplate.save(user);
+        mongoTemplate.save(user);
+        return user;
     }
 
     @Override
     public User delete(User user) {
-        return mongoTemplate.remove(user);
+        mongoTemplate.remove(user);
+        return user;
     }
 
     @Override
