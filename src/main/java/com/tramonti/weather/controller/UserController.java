@@ -2,35 +2,58 @@ package com.tramonti.weather.controller;
 
 import com.tramonti.weather.domain.User;
 import com.tramonti.weather.service.UserService;
+import com.tramonti.weather.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * Created by tarashrynchuk on 3/1/18.
  */
-@RestController("users")
+@RestController()
 public class UserController {
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@GetMapping
-	public List<User> getAllUsers() {
-		return  userService.getUsers();
-	}
+    @Autowired
+    private UserValidator userValidator;
 
-	//TODO: crud users operations
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.findAll();
+    }
 
-	//TODO: get user by  username and
+    //TODO: crud users operations
+    @GetMapping("/users/{id}")
+    public User findUserById(@PathVariable String id) {
+        return userService.find(id);
+    }
 
-	//TODO: use loggers
+    @PutMapping(value = "/users", consumes = "application/json")
+    public User createUser(@RequestBody User user) {
+        return userService.create(user);
+    }
 
-	//@ExceptionHandler - map exception to http error
-	//@ControllerAdvice
+    @PostMapping(value = "/users/update", consumes = "application/json")
+    public User updateUser(@RequestBody User user) {
+        userValidator.validateId(user);
+        return userService.update(user);
+    }
 
+    @DeleteMapping(value = "/users", consumes = "application/json")
+    public User deleteUser(@RequestBody User user) {
+        userValidator.validateId(user);
+        User userToDelete = userService.find(user.getId());
+        userValidator.validateAllUser(user, userToDelete);
+        return userService.delete(user);
+    }
+
+    //TODO: get user by  username and
+
+    //TODO: use loggers
+
+    //@ExceptionHandler - map exception to http error
+    //@ControllerAdvice
 
 }

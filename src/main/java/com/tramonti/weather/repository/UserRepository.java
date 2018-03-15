@@ -9,6 +9,16 @@ import java.util.List;
  */
 public interface UserRepository {
 
-	List<User> getUsers();
+	List<User> findAll();
+
+	User find(User user);
+
+	User create(User user);
+
+	User update(User user);
+
+	User delete(User user);
+
+	void deleteAll();
 
 }
