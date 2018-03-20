@@ -1,6 +1,6 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.domain.User;
+import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.service.UserService;
 import com.tramonti.weather.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;

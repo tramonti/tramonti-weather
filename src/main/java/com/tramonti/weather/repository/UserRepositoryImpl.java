@@ -1,6 +1,6 @@
 package com.tramonti.weather.repository;
 
-import com.tramonti.weather.domain.User;
+import com.tramonti.weather.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

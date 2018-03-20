@@ -1,6 +1,6 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.domain.OpenWeather;
+import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
