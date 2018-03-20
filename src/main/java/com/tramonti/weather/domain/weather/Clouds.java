@@ -1,5 +1,5 @@
 
-package com.tramonti.weather.domain;
+package com.tramonti.weather.domain.weather;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

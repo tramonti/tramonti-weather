@@ -1,4 +1,4 @@
-package com.tramonti.weather.domain;
+package com.tramonti.weather.domain.user;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

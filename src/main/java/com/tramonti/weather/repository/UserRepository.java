@@ -1,6 +1,6 @@
 package com.tramonti.weather.repository;
 
-import com.tramonti.weather.domain.User;
+import com.tramonti.weather.domain.user.User;
 
 import java.util.List;
 

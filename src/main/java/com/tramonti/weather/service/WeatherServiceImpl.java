@@ -1,6 +1,6 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.domain.OpenWeather;
+import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.repository.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

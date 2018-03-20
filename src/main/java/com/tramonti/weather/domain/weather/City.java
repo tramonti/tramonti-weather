@@ -1,5 +1,5 @@
 
-package com.tramonti.weather.domain;
+package com.tramonti.weather.domain.weather;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

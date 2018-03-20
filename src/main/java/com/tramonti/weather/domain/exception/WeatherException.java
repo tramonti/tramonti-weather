@@ -1,4 +1,4 @@
-package com.tramonti.weather.domain;
+package com.tramonti.weather.domain.exception;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
