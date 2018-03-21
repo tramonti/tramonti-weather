@@ -3,6 +3,7 @@ package com.tramonti.weather.controller;
 import com.tramonti.weather.domain.exception.ErrorInfo;
 import com.tramonti.weather.domain.exception.WeatherException;
 import lombok.extern.log4j.Log4j;
+import org.apache.log4j.NDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionController {
     @ExceptionHandler(WeatherException.class)
     public ResponseEntity<ErrorInfo> handleWeatherException(WeatherException e) {
-        this.log(e);
+        log(e);
 
         ResponseEntity<ErrorInfo> errorResponse = buildResponse(e);
         return errorResponse;
@@ -32,6 +33,13 @@ public class ExceptionController {
             case INFO:
                 log.info(e.getDescription(), e.getThrowable());
                 break;
+        }
+        clearNDC();
+    }
+
+    private void clearNDC() {
+        for (int i = 0, NDCDepth = NDC.getDepth(); i < NDCDepth; i++) {
+            NDC.pop();
         }
     }
 

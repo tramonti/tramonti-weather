@@ -2,6 +2,7 @@ package com.tramonti.weather.validator;
 
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
+import org.apache.log4j.NDC;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +16,7 @@ public class UserValidatorImpl implements UserValidator {
                     .setDescription("user id cannot be empty")
                     .setName("Null pointer")
                     .setLevel(UserException.Level.WARNING)
-                    .setStatus(HttpStatus.BAD_REQUEST)
-                    .setThrowable(new NullPointerException());
+                    .setStatus(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -27,8 +27,7 @@ public class UserValidatorImpl implements UserValidator {
                     .setDescription("User with such parameters does not exist")
                     .setStatus(HttpStatus.BAD_REQUEST)
                     .setLevel(UserException.Level.WARNING)
-                    .setName("Validation rules")
-                    .setThrowable(new IllegalAccessError());
+                    .setName("Validation rules");
         }
     }
 }
