@@ -1,13 +1,14 @@
 package com.tramonti.weather.repository;
 
-
 import com.google.gson.Gson;
 import com.tramonti.weather.domain.OpenWeather;
 import com.tramonti.weather.domain.WeatherException;
 import lombok.Cleanup;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,8 +21,13 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
 
 
+    //@Autowired
+   // private RestTemplate restTemplate;
+
     //FIXME: Url string should be in properties file
-    //eg @Value("${weatherUrl}")
+    // @Value("${weatherUrl}")
+     //private String weatherUrl;
+
     //in format acceptable to RestTemplate
 
     @Override
@@ -31,6 +37,9 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         try {
 
             //TODO: refactor to RestTemplate
+
+
+            //restTemplate. getForObject(urlString, OpenWeather.class);
 
             URL url = new URL(urlString);
             @Cleanup
@@ -46,4 +55,27 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         }
         return openWeather;
     }
+
+//    URI targetUrl = UriComponentsBuilder
+//            .fromHttpUrl(this.aviosRegisterServiceUrl.replace(MEMBERSHIP_ID_URI, membershipId))
+//            .queryParam("api_key", aviosApiKey).build().toUri();
+//
+//    HttpEntity<Object> requestEntity = new HttpEntity<Object>(registerRQ, HttpAviosHeadersUtils.withContent());
+//    ResponseEntity<AviosRegisterRS> responseEntity = null;
+//		try {
+//        log.info("Sending avios register request: {}", requestEntity);
+//        responseEntity = restTemplate.exchange(targetUrl, HttpMethod.POST, requestEntity, AviosRegisterRS.class);
+//        if (responseEntity != null && !responseEntity.getStatusCode().equals(HttpStatus.CREATED)) {
+//            throw new AviosRegistrationFailedException("Avios registration failed");
+//        } else {
+//            response = responseEntity.getBody();
+//        }
+//    } catch (HttpClientErrorException e) {
+//        log.warn("Failure calling avios register", e);
+//        throw e;
+//    }
+
+
+
+
 }
