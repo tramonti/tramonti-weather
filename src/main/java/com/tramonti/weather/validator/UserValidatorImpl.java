@@ -10,7 +10,8 @@ public class UserValidatorImpl implements UserValidator {
 
     @Override
     public void validateId(User user) {
-        if (user.getId() == null || user.getId().length() == 0) {
+        String id = user.getId();
+        if (id == null || id.length() == 0) {
             throw new WeatherException()
                     .setDescription("user id cannot be empty")
                     .setName("Null pointer")
