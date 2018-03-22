@@ -2,7 +2,6 @@ package com.tramonti.weather.validator;
 
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
-import org.apache.log4j.NDC;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,8 @@ public class UserValidatorImpl implements UserValidator {
 
     @Override
     public void validateId(User user) {
-        if (user.getId() == null || user.getId().length() == 0) {
+        String id = user.getId();
+        if (id == null || id.length() == 0) {
             throw new UserException()
                     .setDescription("user id cannot be empty")
                     .setName("Null pointer")
