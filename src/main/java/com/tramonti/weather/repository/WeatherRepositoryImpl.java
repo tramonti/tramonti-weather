@@ -1,6 +1,5 @@
 package com.tramonti.weather.repository;
 
-import com.google.gson.Gson;
 import com.tramonti.weather.domain.exception.CityNotFoundException;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import lombok.Cleanup;
@@ -22,16 +21,14 @@ import java.net.URL;
 @Repository
 public class WeatherRepositoryImpl implements WeatherRepository {
 
-
-    //@Autowired
-//    private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Value("${weatherUrl}")
     private String weatherUrl;
 
     @Value("${APIKey}")
     private String APIKey;
-    //in format acceptable to RestTemplate
 
     @Value("${temperatureUnits}")
     private String temperatureUnits;
@@ -46,17 +43,8 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
         OpenWeather openWeather;
         try {
-
-            //TODO: refactor to RestTemplate
-
-
-            //restTemplate. getForObject(urlString, OpenWeather.class);
-
-            URL url = new URL(openWeatherForecastURL.toString());
-            @Cleanup
-            InputStreamReader reader = new InputStreamReader(url.openStream());
-            openWeather = new Gson().fromJson(reader, OpenWeather.class);
-        } catch (IOException e) {
+            openWeather = restTemplate.getForObject(openWeatherForecastURL, OpenWeather.class);
+        } catch (Exception e) {
             NDC.push("cityName = " + cityName);
             NDC.push("exception = " + e.toString());
             throw new CityNotFoundException()
@@ -67,25 +55,5 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         }
         return openWeather;
     }
-
-//    URI targetUrl = UriComponentsBuilder
-//            .fromHttpUrl(this.aviosRegisterServiceUrl.replace(MEMBERSHIP_ID_URI, membershipId))
-//            .queryParam("api_key", aviosApiKey).build().toUri();
-//
-//    HttpEntity<Object> requestEntity = new HttpEntity<Object>(registerRQ, HttpAviosHeadersUtils.withContent());
-//    ResponseEntity<AviosRegisterRS> responseEntity = null;
-//		try {
-//        log.info("Sending avios register request: {}", requestEntity);
-//        responseEntity = restTemplate.exchange(targetUrl, HttpMethod.POST, requestEntity, AviosRegisterRS.class);
-//        if (responseEntity != null && !responseEntity.getStatusCode().equals(HttpStatus.CREATED)) {
-//            throw new AviosRegistrationFailedException("Avios registration failed");
-//        } else {
-//            response = responseEntity.getBody();
-//        }
-//    } catch (HttpClientErrorException e) {
-//        log.warn("Failure calling avios register", e);
-//        throw e;
-//    }
-
 
 }
