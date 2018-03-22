@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by tarashrynchuk on 3/1/18.
  */
-@RestController()
+@RestController
 public class UserController {
     @Autowired
     private UserService userService;
@@ -48,12 +48,4 @@ public class UserController {
         userValidator.validateAllUser(user, userToDelete);
         return userService.delete(user);
     }
-
-    //TODO: get user by  username and
-
-    //TODO: use loggers
-
-    //@ExceptionHandler - map exception to http error
-    //@ControllerAdvice
-
 }
