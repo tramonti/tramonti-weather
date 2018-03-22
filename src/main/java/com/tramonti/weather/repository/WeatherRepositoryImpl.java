@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URL;
 
 //FIXME: calling 3rd party service is not repository
@@ -21,19 +23,27 @@ import java.net.URL;
 public class WeatherRepositoryImpl implements WeatherRepository {
 
 
-
     //@Autowired
-   // private RestTemplate restTemplate;
+//    private RestTemplate restTemplate;
 
-    //FIXME: Url string should be in properties file
-    // @Value("${weatherUrl}")
-     //private String weatherUrl;
+    @Value("${weatherUrl}")
+    private String weatherUrl;
 
+    @Value("${APIKey}")
+    private String APIKey;
     //in format acceptable to RestTemplate
+
+    @Value("${temperatureUnits}")
+    private String temperatureUnits;
 
     @Override
     public OpenWeather getWeather(String cityName) {
-        String urlString = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=metric&APPID=713d9a6a9e5940714f0f60d0f56a095d";
+        URI openWeatherForecastURL = UriComponentsBuilder
+                .fromHttpUrl(weatherUrl)
+                .queryParam("q", cityName)
+                .queryParam("units", temperatureUnits)
+                .queryParam("APPID", APIKey).build().toUri();
+
         OpenWeather openWeather;
         try {
 
@@ -42,7 +52,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
             //restTemplate. getForObject(urlString, OpenWeather.class);
 
-            URL url = new URL(urlString);
+            URL url = new URL(openWeatherForecastURL.toString());
             @Cleanup
             InputStreamReader reader = new InputStreamReader(url.openStream());
             openWeather = new Gson().fromJson(reader, OpenWeather.class);
@@ -76,8 +86,6 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 //        log.warn("Failure calling avios register", e);
 //        throw e;
 //    }
-
-
 
 
 }
