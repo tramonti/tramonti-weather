@@ -48,4 +48,5 @@ public class UserController {
         userValidator.validateAllUser(user, userToDelete);
         return userService.delete(user);
     }
+
 }
