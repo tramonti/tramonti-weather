@@ -1,27 +1,18 @@
 
 package com.tramonti.weather.domain.weather;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
 @Data
 public class Main {
 
-    @SerializedName("temp")
-    @Expose
     private Double temp;
-    @SerializedName("temp_min")
-    @Expose
+    @JsonAlias("temp_min")
     private Double tempMin;
-    @SerializedName("temp_max")
-    @Expose
+    @JsonAlias("temp_max")
     private Double tempMax;
-    @SerializedName("pressure")
-    @Expose
     private Double pressure;
-    @SerializedName("humidity")
-    @Expose
     private Integer humidity;
 
 }

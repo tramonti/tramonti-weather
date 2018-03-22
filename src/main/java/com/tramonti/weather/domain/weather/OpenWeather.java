@@ -1,8 +1,7 @@
 
 package com.tramonti.weather.domain.weather;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
 import java.util.List;
@@ -10,17 +9,11 @@ import java.util.List;
 @Data
 public class OpenWeather {
 
-    @SerializedName("cod")
-    @Expose
+    @JsonAlias("cod")
     private String statusCode;
-    @SerializedName("message")
-    @Expose
     private String message;
-    @SerializedName("list")
-    @Expose
+    @JsonAlias("list")
     private List<WeatherList> weatherList = null;
-    @SerializedName("city")
-    @Expose
     private City city;
 
 }

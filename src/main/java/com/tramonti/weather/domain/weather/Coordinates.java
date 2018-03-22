@@ -1,8 +1,7 @@
 
 package com.tramonti.weather.domain.weather;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -12,11 +11,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Getter @Setter
 public class Coordinates {
 
-    @SerializedName("lat")
-    @Expose
+    @JsonAlias("lat")
     private Double latitude;
-    @SerializedName("lon")
-    @Expose
+    @JsonAlias("lon")
     private Double longitude;
 
     @Override
