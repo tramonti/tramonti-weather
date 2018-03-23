@@ -53,5 +53,11 @@ public class UserRepositoryImpl implements UserRepository {
         mongoTemplate.remove(new Query(), "users");
     }
 
+    @Override
+    public User findUserName(User user) {
+        Query query = new Query(Criteria.where("username").is(user.getUsername()));
+        return mongoTemplate.findOne(query, User.class, "users");
+    }
+
 
 }
