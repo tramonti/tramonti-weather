@@ -66,7 +66,8 @@ public class UserValidatorImpl implements UserValidator {
             if (isNotEmptyAnnotated(field) && isStringType(field)) {
                 String fieldString = (String) getFiledValue(user, field);
                 if (fieldString == null || fieldString.length() == 0) {
-                    violations.add("user." + fieldName + " cannot be empty");
+                    String message = getAnnotationMessage(field);
+                    violations.add(message);
                 }
             }
         }
@@ -109,6 +110,11 @@ public class UserValidatorImpl implements UserValidator {
                     .setDescription("it is not possible to validate user.fields");
         }
         return result;
+    }
+
+    private String getAnnotationMessage(Field field) {
+        NotEmpty notEmptyAnnotation = field.getAnnotation(NotEmpty.class);
+        return notEmptyAnnotation.message();
     }
 
     @Override
