@@ -2,6 +2,7 @@ package com.tramonti.weather.controller;
 
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
 import com.tramonti.weather.domain.weather.OpenWeather;
+import com.tramonti.weather.repository.BroadcastRepository;
 import com.tramonti.weather.service.BroadcastService;
 import com.tramonti.weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class BroadcastController {
     private BroadcastService broadcastService;
 
     @Autowired
+    private BroadcastRepository broadcastRepository;
+
+    @Autowired
     private WeatherService weatherService;
 
     @GetMapping
@@ -37,7 +41,8 @@ public class BroadcastController {
     @GetMapping("/store")
     public List<BroadcastCity> storeCity(@RequestParam("city") String cityName) {
         OpenWeather openWeather = weatherService.getWeather(cityName);
-        return broadcastService.extractFrom(openWeather);
+        List<BroadcastCity> broadcastCities = broadcastService.extractFrom(openWeather);
+        return broadcastRepository.save(broadcastCities);
     }
 
     @GetMapping("/{city}")
