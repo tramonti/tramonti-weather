@@ -7,8 +7,6 @@ import com.google.common.base.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
-//TODO: refactor equals, hash, toString using Java8 Objects
-//or Guava or Apache Commons
 @Getter
 @Setter
 public class City {
