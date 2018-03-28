@@ -4,22 +4,32 @@ import com.tramonti.weather.domain.broadcast.BroadcastCity;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.domain.weather.Weather;
 import com.tramonti.weather.domain.weather.WeatherList;
+import com.tramonti.weather.repository.BroadcastRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class BroadcastServiceImpl implements BroadcastService {
+
+    private final BroadcastRepository broadcastRepository;
+
+    @Autowired
+    public BroadcastServiceImpl(BroadcastRepository broadcastRepository) {
+        this.broadcastRepository = broadcastRepository;
+    }
+
     @Override
     public List<BroadcastCity> extractFrom(OpenWeather openWeather) {
         String city = openWeather.getCity().getName();
         List<WeatherList> weatherList = openWeather.getWeatherList();
-        List<BroadcastCity> broadcastCities = weatherList.parallelStream().map(weatherItem-> transform(weatherItem, city)).collect(Collectors.toList());
-        return broadcastCities;
+        return weatherList.parallelStream()
+                .map(weatherItem -> transform(weatherItem, city))
+                .collect(Collectors.toList());
     }
 
     private BroadcastCity transform(WeatherList weatherItem, String city) {
@@ -37,6 +47,6 @@ public class BroadcastServiceImpl implements BroadcastService {
 
     @Override
     public List<BroadcastCity> save(List<BroadcastCity> cities) {
-        return null;
+        return broadcastRepository.save(cities);
     }
 }
