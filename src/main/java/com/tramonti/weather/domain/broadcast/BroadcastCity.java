@@ -15,7 +15,7 @@ public class BroadcastCity {
     @Id
     private String id;
     private String city;
-    private String temperature;
+    private Double temperature;
     private String description;
     private String icon;
     private LocalDateTime dateTime;
@@ -30,7 +30,7 @@ public class BroadcastCity {
         return this;
     }
 
-    public BroadcastCity setTemperature(String temperature) {
+    public BroadcastCity setTemperature(Double temperature) {
         this.temperature = temperature;
         return this;
     }

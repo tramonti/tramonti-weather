@@ -1,6 +1,9 @@
 package com.tramonti.weather.controller;
 
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
+import com.tramonti.weather.domain.weather.OpenWeather;
+import com.tramonti.weather.service.BroadcastService;
+import com.tramonti.weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,21 +23,21 @@ public class BroadcastController {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private BroadcastService broadcastService;
+
+    @Autowired
+    private WeatherService weatherService;
+
     @GetMapping
     public List<String> getCities() {
         return Collections.singletonList("lviv");
     }
 
     @GetMapping("/store")
-    public BroadcastCity storeCity(@RequestParam("city") String cityName) {
-        BroadcastCity broadcastCity = new BroadcastCity();
-        broadcastCity.setCity(cityName)
-                .setDescription("cloudy")
-                .setIcon("icon")
-                .setTemperature("32")
-                .setDateTime(LocalDateTime.now());
-        mongoTemplate.insert(broadcastCity);
-        return broadcastCity;
+    public List<BroadcastCity> storeCity(@RequestParam("city") String cityName) {
+        OpenWeather openWeather = weatherService.getWeather(cityName);
+        return broadcastService.extractFrom(openWeather);
     }
 
     @GetMapping("/{city}")
