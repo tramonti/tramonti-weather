@@ -48,6 +48,7 @@ public class BroadcastController {
     public List<BroadcastCity> getCityByDay(@PathVariable("city") String cityName,
                                   @RequestParam
                                   @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        cityName = cityName.toLowerCase();
         return broadcastService.find(cityName, date);
     }
 

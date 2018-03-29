@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -31,15 +32,18 @@ public class BroadcastRepositoryImpl implements BroadcastRepository {
         return cities;
     }
 
-    //    TODO: mongo find by date
     @Override
     public List<BroadcastCity> find(String cityName, LocalDate date) {
-        cityName = cityName.toLowerCase();
-        LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.MIDNIGHT);
+        LocalDateTime dateMidnight = LocalDateTime.of(date, LocalTime.MIDNIGHT);
+        LocalDateTime nextDateMidnight = dateMidnight.plusDays(1);
 
         Query query = new Query(Criteria.where("city").is(cityName)
-                .and("dateTime").is(dateTime));
-        return mongoTemplate.find(query, BroadcastCity.class);
+                .and("dateTime").gte(dateMidnight).lt(nextDateMidnight));
+
+        List<BroadcastCity> result = mongoTemplate.find(query, BroadcastCity.class);
+        result.sort(Comparator.comparing(BroadcastCity::getDateTime));
+
+        return result;
     }
     private void upsert(BroadcastCity city){
         Query query = new Query(Criteria.where("city").is(city.getCity())
@@ -48,7 +52,7 @@ public class BroadcastRepositoryImpl implements BroadcastRepository {
         Document dbDoc = new Document();
         mongoTemplate.getConverter().write(city, dbDoc);
         Update update = Update.fromDocument(dbDoc, "_id");
-        UpdateResult result = mongoTemplate.upsert(query, update, BroadcastCity.class, "broadcast");
+        UpdateResult result = mongoTemplate.upsert(query, update, BroadcastCity.class);
         String id;
         if (result.getUpsertedId() != null) {
             id = result.getUpsertedId().asObjectId().getValue().toString();
