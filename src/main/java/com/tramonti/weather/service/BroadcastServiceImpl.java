@@ -8,6 +8,7 @@ import com.tramonti.weather.repository.BroadcastRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -25,7 +26,7 @@ public class BroadcastServiceImpl implements BroadcastService {
 
     @Override
     public List<BroadcastCity> extractFrom(OpenWeather openWeather) {
-        String city = openWeather.getCity().getName();
+        String city = openWeather.getCity().getName().toLowerCase();
         List<WeatherList> weatherList = openWeather.getWeatherList();
         return weatherList.parallelStream()
                 .map(weatherItem -> transform(weatherItem, city))
@@ -48,5 +49,10 @@ public class BroadcastServiceImpl implements BroadcastService {
     @Override
     public List<BroadcastCity> save(List<BroadcastCity> cities) {
         return broadcastRepository.save(cities);
+    }
+
+    @Override
+    public List<BroadcastCity> find(String cityName, LocalDate localDate) {
+        return broadcastRepository.find(cityName, localDate);
     }
 }

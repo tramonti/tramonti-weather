@@ -45,8 +45,10 @@ public class BroadcastController {
     }
 
     @GetMapping("/{city}")
-    public LocalDate getCityByDay(@PathVariable("city") String cityName, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        return date;
+    public List<BroadcastCity> getCityByDay(@PathVariable("city") String cityName,
+                                  @RequestParam
+                                  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        return broadcastService.find(cityName, date);
     }
 
 
