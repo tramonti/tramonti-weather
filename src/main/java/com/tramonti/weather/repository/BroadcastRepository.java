@@ -10,4 +10,6 @@ public interface BroadcastRepository {
     List<BroadcastCity> save(List<BroadcastCity> cities);
 
     List<BroadcastCity> find(String cityName, LocalDate date);
+
+    List<String> getAvailableCities();
 }

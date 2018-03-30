@@ -13,4 +13,6 @@ public interface BroadcastService {
     List<BroadcastCity> save(List<BroadcastCity> cities);
 
     List<BroadcastCity> find(String cityName, LocalDate localDate);
+
+    List<String> findAvailableCities();
 }

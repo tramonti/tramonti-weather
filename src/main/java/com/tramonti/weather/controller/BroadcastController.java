@@ -19,22 +19,19 @@ import java.util.List;
 @RequestMapping("/broadcast")
 public class BroadcastController {
 
-    private final MongoTemplate mongoTemplate;
-
     private final BroadcastService broadcastService;
 
     private final WeatherService weatherService;
 
     @Autowired
-    public BroadcastController(MongoTemplate mongoTemplate, BroadcastService broadcastService, WeatherService weatherService) {
-        this.mongoTemplate = mongoTemplate;
+    public BroadcastController(BroadcastService broadcastService, WeatherService weatherService) {
         this.broadcastService = broadcastService;
         this.weatherService = weatherService;
     }
 
     @GetMapping
     public List<String> getCities() {
-        return Collections.singletonList("lviv");
+        return broadcastService.findAvailableCities();
     }
 
     @GetMapping("/store")
@@ -46,8 +43,8 @@ public class BroadcastController {
 
     @GetMapping("/{city}")
     public List<BroadcastCity> getCityByDay(@PathVariable("city") String cityName,
-                                  @RequestParam
-                                  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+                                            @RequestParam
+                                            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         cityName = cityName.toLowerCase();
         return broadcastService.find(cityName, date);
     }
@@ -55,8 +52,7 @@ public class BroadcastController {
 
     @GetMapping("/{city}/next")
     public List<BroadcastCity> getNextCity(@PathVariable String city) {
-        Query query = new Query(Criteria.where("city").is(city));
-        return mongoTemplate.find(query, BroadcastCity.class);
+        return null;
     }
 
     @GetMapping("/{city}/prev")

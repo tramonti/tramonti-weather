@@ -1,5 +1,6 @@
 package com.tramonti.weather.repository;
 
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.UpdateResult;
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
 import org.bson.Document;
@@ -13,8 +14,10 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 
 @Repository
 public class BroadcastRepositoryImpl implements BroadcastRepository {
@@ -45,7 +48,8 @@ public class BroadcastRepositoryImpl implements BroadcastRepository {
 
         return result;
     }
-    private void upsert(BroadcastCity city){
+
+    private void upsert(BroadcastCity city) {
         Query query = new Query(Criteria.where("city").is(city.getCity())
                 .and("dateTime").is(city.getDateTime()));
 
@@ -61,5 +65,16 @@ public class BroadcastRepositoryImpl implements BroadcastRepository {
             id = mongoTemplate.findOne(query, BroadcastCity.class).getId();
         }
         city.setId(id);
+    }
+
+    @Override
+    public List<String> getAvailableCities() {
+        List<String> cities = new ArrayList<>();
+
+        MongoCollection<Document> collection = mongoTemplate.getCollection("broadcast");
+
+        collection.distinct("city", String.class).forEach((Consumer<String>) cities::add);
+        cities.sort(Comparator.naturalOrder());
+        return cities;
     }
 }

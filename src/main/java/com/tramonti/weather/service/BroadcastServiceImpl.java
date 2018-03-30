@@ -55,4 +55,9 @@ public class BroadcastServiceImpl implements BroadcastService {
     public List<BroadcastCity> find(String cityName, LocalDate localDate) {
         return broadcastRepository.find(cityName, localDate);
     }
+
+    @Override
+    public List<String> findAvailableCities() {
+        return broadcastRepository.getAvailableCities();
+    }
 }
