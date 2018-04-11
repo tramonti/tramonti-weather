@@ -11,5 +11,7 @@ public interface BroadcastRepository {
 
     List<BroadcastCity> find(String cityName, LocalDate date);
 
+    boolean exists(String cityName, LocalDate date);
+
     List<String> getAvailableCities();
 }

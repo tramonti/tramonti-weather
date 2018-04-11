@@ -37,16 +37,25 @@ public class BroadcastRepositoryImpl implements BroadcastRepository {
 
     @Override
     public List<BroadcastCity> find(String cityName, LocalDate date) {
+        Query query = getCityDateQuery(cityName, date);
+        List<BroadcastCity> result = mongoTemplate.find(query, BroadcastCity.class);
+        result.sort(Comparator.comparing(BroadcastCity::getDateTime));
+        return result;
+    }
+
+    @Override
+    public boolean exists(String cityName, LocalDate date) {
+        Query query = getCityDateQuery(cityName, date);
+        BroadcastCity result = mongoTemplate.findOne(query, BroadcastCity.class);
+        return result != null;
+    }
+
+    private Query getCityDateQuery(String cityName, LocalDate date) {
         LocalDateTime dateMidnight = LocalDateTime.of(date, LocalTime.MIDNIGHT);
         LocalDateTime nextDateMidnight = dateMidnight.plusDays(1);
 
-        Query query = new Query(Criteria.where("city").is(cityName)
+        return new Query(Criteria.where("city").is(cityName)
                 .and("dateTime").gte(dateMidnight).lt(nextDateMidnight));
-
-        List<BroadcastCity> result = mongoTemplate.find(query, BroadcastCity.class);
-        result.sort(Comparator.comparing(BroadcastCity::getDateTime));
-
-        return result;
     }
 
     private void upsert(BroadcastCity city) {

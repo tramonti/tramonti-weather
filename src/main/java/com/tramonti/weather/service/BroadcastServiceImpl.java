@@ -57,6 +57,11 @@ public class BroadcastServiceImpl implements BroadcastService {
     }
 
     @Override
+    public boolean exists(String cityName, LocalDate localDate) {
+        return broadcastRepository.exists(cityName, localDate);
+    }
+
+    @Override
     public List<String> findAvailableCities() {
         return broadcastRepository.getAvailableCities();
     }

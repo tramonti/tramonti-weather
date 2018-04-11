@@ -14,5 +14,7 @@ public interface BroadcastService {
 
     List<BroadcastCity> find(String cityName, LocalDate localDate);
 
+    boolean exists(String cityName, LocalDate localDate);
+
     List<String> findAvailableCities();
 }
