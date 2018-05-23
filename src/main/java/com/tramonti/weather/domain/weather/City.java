@@ -1,30 +1,20 @@
 
-package com.tramonti.weather.domain;
+package com.tramonti.weather.domain.weather;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 
-//TODO: refactor equals, hash, toString using Java8 Objects
-//or Guava or Apache Commons
 @Getter
 @Setter
 public class City {
 
-    @SerializedName("id")
-    @Expose
     private Integer id;
-    @SerializedName("name")
-    @Expose
     private String name;
-    @SerializedName("coord")
-    @Expose
+    @JsonAlias("coord")
     private Coordinates coordinates;
-    @SerializedName("country")
-    @Expose
     private String country;
 
     @Override

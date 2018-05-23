@@ -1,6 +1,6 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.domain.OpenWeather;
+import com.tramonti.weather.domain.weather.OpenWeather;
 
 public interface WeatherService {
 

@@ -1,6 +1,6 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.domain.User;
+import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.service.UserService;
 import com.tramonti.weather.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,6 @@ public class UserController {
         return userService.findAll();
     }
 
-    //TODO: crud users operations
     @GetMapping("/users/{id}")
     public User findUserById(@PathVariable String id) {
         return userService.find(id);
@@ -32,20 +31,24 @@ public class UserController {
 
     @PutMapping(value = "/users", consumes = "application/json")
     public User createUser(@RequestBody User user) {
+        userValidator.validateFieldsNotEmpty(user, "username", "password");
+        userValidator.validateUserNameExists(user);
         return userService.create(user);
     }
 
     @PostMapping(value = "/users/update", consumes = "application/json")
     public User updateUser(@RequestBody User user) {
-        userValidator.validateId(user);
+        userValidator.validateBean(user);
+        userValidator.validateUserIdExists(user);
         return userService.update(user);
     }
 
     @DeleteMapping(value = "/users", consumes = "application/json")
     public User deleteUser(@RequestBody User user) {
-        userValidator.validateId(user);
+        userValidator.validateBean(user);
+        userValidator.validateUserMatchesExistingUser(user);
         User userToDelete = userService.find(user.getId());
-        userValidator.validateAllUser(user, userToDelete);
         return userService.delete(user);
     }
+
 }
