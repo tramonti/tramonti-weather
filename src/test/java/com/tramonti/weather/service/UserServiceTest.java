@@ -1,5 +1,6 @@
 package com.tramonti.weather.service;
 
+import com.tramonti.weather.UserStubFactory;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.repository.UserRepository;
 import org.junit.Before;
@@ -33,19 +34,7 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        User u1 = new User();
-        u1.setId("63df2fds8963khkcs232d32eds2d");
-        u1.setPassword("haslfdhaf");
-        u1.setUsername("qwe");
-
-        User u2 = new User();
-        u2.setId("63df2fds8963khkcs232d32eds2d");
-        u2.setPassword("dasfhlshf");
-        u2.setUsername("zxcvb");
-
-        stubUsers = new ArrayList<>();
-        stubUsers.add(u1);
-        stubUsers.add(u2);
+        stubUsers = UserStubFactory.getStubUsers();
         userService = new UserServiceImpl(userRepository);
     }
 
