@@ -8,16 +8,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by tarashrynchuk on 3/1/18.
- */
 @RestController
 public class UserController {
-    @Autowired
+
     private UserService userService;
 
-    @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    public UserController(UserService userService, UserValidator userValidator) {
+        this.userService = userService;
+        this.userValidator = userValidator;
+    }
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
