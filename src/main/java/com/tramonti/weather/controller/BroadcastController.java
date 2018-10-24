@@ -1,8 +1,7 @@
 package com.tramonti.weather.controller;
 
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
-import com.tramonti.weather.domain.broadcast.BroadcastResource;
-import com.tramonti.weather.domain.broadcast.CityListResource;
+import com.tramonti.weather.domain.hateaos.HateaosResource;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.service.BroadcastService;
 import com.tramonti.weather.service.WeatherService;
@@ -33,11 +32,11 @@ public class BroadcastController {
     }
 
     @GetMapping
-    public CityListResource getCities() {
+    public HateaosResource<List<String>> getCities() {
         List<String> cities = broadcastService.findAvailableCities();
         String firstCity = cities.get(0);
 
-        CityListResource cityListResource = new CityListResource(cities);
+        HateaosResource<List<String>> cityListResource = new HateaosResource<>(cities);
         Link selfLink = linkTo(methodOn(BroadcastController.class).getCities())
                 .withSelfRel()
                 .withTitle("getCity")
@@ -69,11 +68,11 @@ public class BroadcastController {
     }
 
     @GetMapping("/{city}")
-    public BroadcastResource getCityByDay(@PathVariable("city") String cityName,
-                                          @RequestParam
+    public HateaosResource<List<BroadcastCity>> getCityByDay(@PathVariable("city") String cityName,
+                                        @RequestParam
                                           @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
 
-        BroadcastResource resource = new BroadcastResource();
+        HateaosResource<List<BroadcastCity>> resource = new HateaosResource<>();
         cityName = cityName.toLowerCase();
         boolean nextDayPresent = broadcastService.exists(cityName, date.plusDays(1));
         boolean prevDayPresent = broadcastService.exists(cityName, date.minusDays(1));
@@ -87,7 +86,7 @@ public class BroadcastController {
         if (prevDayPresent) {
             resource.add(linkTo(methodOn(BroadcastController.class).getCityByDay(cityName, date.minusDays(1))).withRel("prevDay"));
         }
-        resource.setWeather(broadcastService.find(cityName, date));
+        resource.setResource(broadcastService.find(cityName, date));
         return resource;
     }
 }
