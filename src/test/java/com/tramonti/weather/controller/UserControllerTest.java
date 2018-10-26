@@ -1,6 +1,6 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.UserStubFactory;
+import com.tramonti.weather.StubFactory;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.service.UserService;
 import com.tramonti.weather.validator.UserValidator;
@@ -39,7 +39,7 @@ public class UserControllerTest {
     @Before
     public void setUp(){
         userController = new UserController(userService, userValidator);
-        stubUsers = UserStubFactory.getStubUsers();
+        stubUsers = StubFactory.getStubUsers();
     }
 
     @Test

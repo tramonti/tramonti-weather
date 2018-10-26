@@ -1,6 +1,6 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.UserStubFactory;
+import com.tramonti.weather.StubFactory;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.repository.UserRepository;
 import org.junit.Before;
@@ -34,7 +34,7 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        stubUsers = UserStubFactory.getStubUsers();
+        stubUsers = StubFactory.getStubUsers();
         userService = new UserServiceImpl(userRepository);
     }
 
