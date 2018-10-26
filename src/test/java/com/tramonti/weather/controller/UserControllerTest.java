@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -39,7 +40,7 @@ public class UserControllerTest {
     @Before
     public void setUp(){
         userController = new UserController(userService, userValidator);
-        stubUsers = StubFactory.getStubUsers();
+        stubUsers = new ArrayList<>(Arrays.asList(StubFactory.getStub("users", User[].class)));
     }
 
     @Test

@@ -7,27 +7,11 @@ import com.tramonti.weather.domain.user.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StubFactory {
     private static final String RESOURCE_PATTERN = "stubs/{CLASS_DIR}/{FILE}.json";
-
-
-    public static List<User> getStubUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        User u1 = new User();
-        u1.setId("5aa64f12f3536b2eacb883d");
-        u1.setPassword("haslfdhaf");
-        u1.setUsername("qwe");
-
-        User u2 = new User();
-        u2.setId("63df2fds8963khkcs232d32eds2d");
-        u2.setPassword("dasfhlshf");
-        u2.setUsername("zxcvb");
-        users.add(u1);
-        users.add(u2);
-        return users;
-    }
 
     public static <T> T getStub(String resourceFileName, Class clazz) {
         String jsonUrl = formURL(resourceFileName, clazz);
@@ -43,8 +27,12 @@ public class StubFactory {
     }
 
     private static String formURL(String resourceFileName, Class clazz) {
+        String className = clazz.getSimpleName();
+        if (clazz.isArray()) {
+            className = className.replace("[]", "");
+        }
         String resourceUrl = RESOURCE_PATTERN
-                .replace("{CLASS_DIR}", clazz.getSimpleName())
+                .replace("{CLASS_DIR}", className)
                 .replace("{FILE}", resourceFileName);
         return resourceUrl;
     }
