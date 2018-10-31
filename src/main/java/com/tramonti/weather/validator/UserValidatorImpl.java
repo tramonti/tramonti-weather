@@ -37,7 +37,8 @@ public class UserValidatorImpl implements UserValidator {
                     .setLevel(UserException.Level.WARNING)
                     .setStatus(HttpStatus.BAD_REQUEST)
                     .setName("business rules violation")
-                    .setDescription(descriptionBuilder.toString());
+                    .setDescription(descriptionBuilder.toString())
+                    .setClassName(this.getClass().getName());
         }
     }
 
@@ -54,7 +55,8 @@ public class UserValidatorImpl implements UserValidator {
                     .setLevel(UserException.Level.WARNING)
                     .setStatus(HttpStatus.BAD_REQUEST)
                     .setName("business rules violation")
-                    .setDescription(descriptionJoiner.toString());
+                    .setDescription(descriptionJoiner.toString())
+                    .setClassName(this.getClass().getName());
         }
     }
 
@@ -84,7 +86,8 @@ public class UserValidatorImpl implements UserValidator {
                     .setLevel(UserException.Level.ERROR)
                     .setStatus(HttpStatus.CONFLICT)
                     .setName("validation failed")
-                    .setDescription("it is not possible to validate user.fields");
+                    .setDescription("it is not possible to validate user.fields")
+                    .setClassName(this.getClass().getName());
         }
     }
 
@@ -107,7 +110,8 @@ public class UserValidatorImpl implements UserValidator {
                     .setLevel(UserException.Level.ERROR)
                     .setStatus(HttpStatus.CONFLICT)
                     .setName("validation failed")
-                    .setDescription("it is not possible to validate user.fields");
+                    .setDescription("it is not possible to validate user.fields")
+                    .setClassName(this.getClass().getName());
         }
         return result;
     }
@@ -125,7 +129,8 @@ public class UserValidatorImpl implements UserValidator {
                     .setLevel(UserException.Level.WARNING)
                     .setStatus(HttpStatus.FORBIDDEN)
                     .setName("user does not exist")
-                    .setDescription("there is no user with id " + user.getId());
+                    .setDescription("there is no user with id " + user.getId())
+                    .setClassName(this.getClass().getName());
         }
     }
 
@@ -137,7 +142,8 @@ public class UserValidatorImpl implements UserValidator {
                     .setLevel(UserException.Level.WARNING)
                     .setStatus(HttpStatus.FORBIDDEN)
                     .setName("user does not exist")
-                    .setDescription("entered user does not match existing user");
+                    .setDescription("entered user does not match existing user")
+                    .setClassName(this.getClass().getName());
         }
     }
 
@@ -149,7 +155,8 @@ public class UserValidatorImpl implements UserValidator {
                     .setLevel(UserException.Level.WARNING)
                     .setStatus(HttpStatus.FORBIDDEN)
                     .setName("user already exists")
-                    .setDescription("user with such username already exists");
+                    .setDescription("user with such username already exists")
+                    .setClassName(this.getClass().getName());
         }
     }
 
