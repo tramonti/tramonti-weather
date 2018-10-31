@@ -49,7 +49,6 @@ public class UserController {
     public User deleteUser(@RequestBody User user) {
         userValidator.validateBean(user);
         userValidator.validateUserMatchesExistingUser(user);
-        User userToDelete = userService.find(user.getId());
         return userService.delete(user);
     }
 

@@ -1,14 +1,11 @@
 package com.tramonti.weather;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
-import com.tramonti.weather.domain.user.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class StubFactory {
     private static final String RESOURCE_PATTERN = "stubs/{CLASS_DIR}/{FILE}.json";
@@ -35,5 +32,15 @@ public class StubFactory {
                 .replace("{CLASS_DIR}", className)
                 .replace("{FILE}", resourceFileName);
         return resourceUrl;
+    }
+
+    public static <E> String formJsonString(E object){
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        try {
+            return mapper.writeValueAsString(object);
+        }catch (JsonProcessingException e) {
+            throw new TestException(e);
+        }
     }
 }

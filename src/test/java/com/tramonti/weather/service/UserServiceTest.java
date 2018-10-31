@@ -1,6 +1,7 @@
 package com.tramonti.weather.service;
 
 import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.repository.UserRepository;
 import org.junit.Before;
@@ -74,11 +75,12 @@ public class UserServiceTest {
     @Test
     public void findFailTest() {
         when(userRepository.find(any())).thenReturn(null);
+        exception.expect(UserException.class);
 
-        User testUser = userService.find("63df2fds8963khkcs232d32eds2d");
+        userService.find("63df2fds8963khkcs232d32eds2d");
 
         verify(userRepository, only()).find(any());
-        assertNull(testUser);
+        verifyNoMoreInteractions(userRepository);
     }
 
     @Test

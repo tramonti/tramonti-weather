@@ -20,8 +20,8 @@ public class ExceptionController {
     }
 
     private void log(WeatherException e) {
-        String info = String.format("Class: [%s], description[%s]", e.getClassName(), e.getDescription());
-        switch (e.getLevel()) {
+        String info = String.format("Class: [%s], description: [%s]", e.getClassName(), e.getDescription());
+        switch(e.getLevel()) {
             case FATAL:
                 log.fatal(info, e.getThrowable());
                 break;
@@ -39,7 +39,7 @@ public class ExceptionController {
     }
 
     private void clearNDC() {
-        for (int i = 0, NDCDepth = NDC.getDepth(); i < NDCDepth; i++) {
+        for(int i = 0, NDCDepth = NDC.getDepth(); i < NDCDepth; i++) {
             NDC.pop();
         }
     }
