@@ -1,0 +1,26 @@
+[
+  {
+    "id": "5bdb02e64d9839ef07377571",
+    "city": "london",
+    "temperature": 6.38,
+    "description": "light rain",
+    "icon": "10n",
+    "dateTime": "2018-11-01T18:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377569",
+    "city": "london",
+    "temperature": 8.19,
+    "description": "light rain",
+    "icon": "10d",
+    "dateTime": "2018-11-01T15:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377565",
+    "city": "london",
+    "temperature": 3.78,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-01T21:00:00"
+  }
+]

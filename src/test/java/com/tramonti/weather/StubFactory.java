@@ -10,10 +10,16 @@ import java.io.IOException;
 public class StubFactory {
     private static final String RESOURCE_PATTERN = "stubs/{CLASS_DIR}/{FILE}.json";
 
+    private static ObjectMapper mapper;
+
+    static {
+        mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        mapper.findAndRegisterModules();
+    }
+
     public static <T> T getStub(String resourceFileName, Class clazz) {
         String jsonUrl = formURL(resourceFileName, clazz);
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         Object result;
         try {
             result = mapper.readValue(Resources.getResource(jsonUrl).openStream(), clazz);
@@ -34,9 +40,7 @@ public class StubFactory {
         return resourceUrl;
     }
 
-    public static <E> String formJsonString(E object){
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    public static <T> String formJsonString(T object){
         try {
             return mapper.writeValueAsString(object);
         }catch (JsonProcessingException e) {

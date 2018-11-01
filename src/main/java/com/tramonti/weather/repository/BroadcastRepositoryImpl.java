@@ -22,6 +22,8 @@ import java.util.function.Consumer;
 @Repository
 public class BroadcastRepositoryImpl implements BroadcastRepository {
 
+    private static final String BROADCAST_COLLECTION = "broadcast";
+
     private final MongoTemplate mongoTemplate;
 
     @Autowired
@@ -80,7 +82,7 @@ public class BroadcastRepositoryImpl implements BroadcastRepository {
     public List<String> getAvailableCities() {
         List<String> cities = new ArrayList<>();
 
-        MongoCollection<Document> collection = mongoTemplate.getCollection("broadcast");
+        MongoCollection<Document> collection = mongoTemplate.getCollection(BROADCAST_COLLECTION);
 
         collection.distinct("city", String.class).forEach((Consumer<String>) cities::add);
         cities.sort(Comparator.naturalOrder());

@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private final String USER_COLLECTION = "users";
+    private static final String USER_COLLECTION = "users";
 
     private MongoTemplate mongoTemplate;
 

@@ -1,0 +1,351 @@
+[
+  {
+    "id": "5bdb02e64d9839ef07377571",
+    "city": "london",
+    "temperature": 6.04,
+    "description": "light rain",
+    "icon": "10n",
+    "dateTime": "2018-11-01T18:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377565",
+    "city": "london",
+    "temperature": 3.55,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-01T21:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737756d",
+    "city": "london",
+    "temperature": 1.51,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-02T00:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377574",
+    "city": "london",
+    "temperature": 1.01,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-02T03:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377547",
+    "city": "london",
+    "temperature": 0.83,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-02T06:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737754e",
+    "city": "london",
+    "temperature": 3.41,
+    "description": "clear sky",
+    "icon": "01d",
+    "dateTime": "2018-11-02T09:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377558",
+    "city": "london",
+    "temperature": 8.21,
+    "description": "clear sky",
+    "icon": "01d",
+    "dateTime": "2018-11-02T12:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377562",
+    "city": "london",
+    "temperature": 9.06,
+    "description": "clear sky",
+    "icon": "01d",
+    "dateTime": "2018-11-02T15:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737756a",
+    "city": "london",
+    "temperature": 3.06,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-02T18:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377550",
+    "city": "london",
+    "temperature": -0.13,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-02T21:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377552",
+    "city": "london",
+    "temperature": 0.04,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-03T00:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377546",
+    "city": "london",
+    "temperature": 0.92,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-03T03:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377549",
+    "city": "london",
+    "temperature": 3.24,
+    "description": "few clouds",
+    "icon": "02n",
+    "dateTime": "2018-11-03T06:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737754b",
+    "city": "london",
+    "temperature": 6.91,
+    "description": "scattered clouds",
+    "icon": "03d",
+    "dateTime": "2018-11-03T09:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377559",
+    "city": "london",
+    "temperature": 11.02,
+    "description": "clear sky",
+    "icon": "01d",
+    "dateTime": "2018-11-03T12:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377561",
+    "city": "london",
+    "temperature": 9.97,
+    "description": "clear sky",
+    "icon": "01d",
+    "dateTime": "2018-11-03T15:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377544",
+    "city": "london",
+    "temperature": 7.95,
+    "description": "clear sky",
+    "icon": "02n",
+    "dateTime": "2018-11-03T18:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377555",
+    "city": "london",
+    "temperature": 8.35,
+    "description": "scattered clouds",
+    "icon": "03n",
+    "dateTime": "2018-11-03T21:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737755e",
+    "city": "london",
+    "temperature": 8.53,
+    "description": "broken clouds",
+    "icon": "04n",
+    "dateTime": "2018-11-04T00:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377586",
+    "city": "london",
+    "temperature": 8.51,
+    "description": "scattered clouds",
+    "icon": "03n",
+    "dateTime": "2018-11-04T03:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737758e",
+    "city": "london",
+    "temperature": 7.64,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-04T06:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377580",
+    "city": "london",
+    "temperature": 9.49,
+    "description": "light rain",
+    "icon": "10d",
+    "dateTime": "2018-11-04T09:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377588",
+    "city": "london",
+    "temperature": 13.14,
+    "description": "light rain",
+    "icon": "10d",
+    "dateTime": "2018-11-04T12:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377590",
+    "city": "london",
+    "temperature": 13.18,
+    "description": "light rain",
+    "icon": "10d",
+    "dateTime": "2018-11-04T15:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737755c",
+    "city": "london",
+    "temperature": 10.72,
+    "description": "light rain",
+    "icon": "10n",
+    "dateTime": "2018-11-04T18:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377566",
+    "city": "london",
+    "temperature": 8.8,
+    "description": "broken clouds",
+    "icon": "04n",
+    "dateTime": "2018-11-04T21:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737756e",
+    "city": "london",
+    "temperature": 6.59,
+    "description": "scattered clouds",
+    "icon": "03n",
+    "dateTime": "2018-11-05T00:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377577",
+    "city": "london",
+    "temperature": 5.17,
+    "description": "scattered clouds",
+    "icon": "03n",
+    "dateTime": "2018-11-05T03:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737757e",
+    "city": "london",
+    "temperature": 6.51,
+    "description": "broken clouds",
+    "icon": "04n",
+    "dateTime": "2018-11-05T06:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377592",
+    "city": "london",
+    "temperature": 9.54,
+    "description": "broken clouds",
+    "icon": "04d",
+    "dateTime": "2018-11-05T09:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377594",
+    "city": "london",
+    "temperature": 15.31,
+    "description": "scattered clouds",
+    "icon": "03d",
+    "dateTime": "2018-11-05T12:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377579",
+    "city": "london",
+    "temperature": 17.58,
+    "description": "clear sky",
+    "icon": "02d",
+    "dateTime": "2018-11-05T15:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377583",
+    "city": "london",
+    "temperature": 13.29,
+    "description": "few clouds",
+    "icon": "02n",
+    "dateTime": "2018-11-05T18:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737758c",
+    "city": "london",
+    "temperature": 11.29,
+    "description": "few clouds",
+    "icon": "02n",
+    "dateTime": "2018-11-05T21:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377572",
+    "city": "london",
+    "temperature": 11.22,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-06T00:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737757a",
+    "city": "london",
+    "temperature": 9.72,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-06T03:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737757c",
+    "city": "london",
+    "temperature": 8.44,
+    "description": "clear sky",
+    "icon": "01n",
+    "dateTime": "2018-11-06T06:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef07377584",
+    "city": "london",
+    "temperature": 11.19,
+    "description": "clear sky",
+    "icon": "02d",
+    "dateTime": "2018-11-06T09:00:00"
+  },
+  {
+    "id": "5bdb02e64d9839ef0737758a",
+    "city": "london",
+    "temperature": 16.98,
+    "description": "clear sky",
+    "icon": "01d",
+    "dateTime": "2018-11-06T12:00:00"
+  },
+  {
+    "id": "5bdb15824d9839ef0737769c",
+    "city": "london",
+    "temperature": 16.61,
+    "description": "scattered clouds",
+    "icon": "03d",
+    "dateTime": "2018-11-06T15:00:00"
+  }
+],
+"links": [
+{
+"rel": "self",
+"href": "http://localhost:8080/broadcast/store?city=london",
+"hreflang": null,
+"media": null,
+"title": null,
+"type": null,
+"deprecation": null
+},
+{
+"rel": "getTodayCityWeather",
+"href": "http://localhost:8080/broadcast/London?date=2018-11-01",
+"hreflang": null,
+"media": null,
+"title": null,
+"type": null,
+"deprecation": null
+},
+{
+"rel": "getCompleteCityWeather",
+"href": "http://localhost:8080/weather?city=london",
+"hreflang": null,
+"media": null,
+"title": null,
+"type": null,
+"deprecation": null
+}
+]

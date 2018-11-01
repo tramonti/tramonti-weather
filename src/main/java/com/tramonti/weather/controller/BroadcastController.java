@@ -54,12 +54,13 @@ public class BroadcastController {
     }
 
     @GetMapping("/store")
-    public ResourceSupport storeCity(@RequestParam("city") String cityName) {
+    public HateaosResource<List<BroadcastCity>> storeCity(@RequestParam("city") String cityName) {
         OpenWeather openWeather = weatherService.getWeather(cityName);
         List<BroadcastCity> broadcastCities = broadcastService.extractFrom(openWeather);
         broadcastService.save(broadcastCities);
-        ResourceSupport resources = new ResourceSupport();
 
+        HateaosResource<List<BroadcastCity>> resources = new HateaosResource<>();
+        resources.setResource(broadcastCities);
         resources.add(linkTo(methodOn(BroadcastController.class).storeCity(cityName)).withSelfRel());
         resources.add(linkTo(methodOn(BroadcastController.class).getCityByDay(openWeather.getCity().getName(), LocalDate.now()))
                 .withRel("getTodayCityWeather"));
