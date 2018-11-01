@@ -1,6 +1,6 @@
 package com.tramonti.weather.repository;
 
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.user.User;
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,7 +34,7 @@ public class UserRepositoryTest {
     @Before
     public void setUp() throws Exception {
         userRepository = new UserRepositoryImpl(mongoTemplate);
-        stubUsers = new ArrayList(Arrays.asList(StubFactory.getStub("Users", User[].class)));
+        stubUsers = new ArrayList(Arrays.asList(TestUtils.getStub("Users", User[].class)));
     }
 
     @Test

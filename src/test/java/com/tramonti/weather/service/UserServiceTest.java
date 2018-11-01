@@ -1,6 +1,6 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.repository.UserRepository;
@@ -36,7 +36,7 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        stubUsers = new ArrayList<>(Arrays.asList(StubFactory.getStub("users", User[].class)));
+        stubUsers = new ArrayList<>(Arrays.asList(TestUtils.getStub("users", User[].class)));
         userService = new UserServiceImpl(userRepository);
     }
 

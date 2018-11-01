@@ -1,6 +1,6 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.repository.BroadcastRepository;
@@ -42,7 +42,7 @@ public class BroadcastServiceTest {
 
     @Test
     public void extractBroadcastCityListFromOpenWeatherTest() {
-        OpenWeather openWeatherStub = StubFactory.getStub("London", OpenWeather.class);
+        OpenWeather openWeatherStub = TestUtils.getStub("London", OpenWeather.class);
 
         List<BroadcastCity> result = broadcastService.extractFrom(openWeatherStub);
 

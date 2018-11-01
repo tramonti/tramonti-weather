@@ -1,6 +1,6 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.CityNotFoundException;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.service.WeatherService;
@@ -31,12 +31,12 @@ public class WeatherControllerTest {
 
     @Test
     public void getWeatherSuccessTest() throws Exception {
-        OpenWeather stubWeather = StubFactory.getStub("London", OpenWeather.class);
+        OpenWeather stubWeather = TestUtils.getStub("London", OpenWeather.class);
         when(weatherService.getWeather("London")).thenReturn(stubWeather);
 
         mockMvc.perform(get("/weather?city=London")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(StubFactory.formJsonString(stubWeather)));
+                .andExpect(content().json(TestUtils.formJsonString(stubWeather)));
     }
 
     @Test

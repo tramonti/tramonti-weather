@@ -1,6 +1,6 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.CityNotFoundException;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class WeatherServiceTest {
 
     @Test
     public void getWeatherSuccess() throws URISyntaxException {
-        OpenWeather weatherStub = StubFactory.getStub("London", OpenWeather.class);
+        OpenWeather weatherStub = TestUtils.getStub("London", OpenWeather.class);
         URI uri = new URI("http://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&APPID=713d9a6a9e5940714f0f60d0f56a095d");
         when(restTemplate.getForObject(uri, OpenWeather.class))
                 .thenReturn(weatherStub);

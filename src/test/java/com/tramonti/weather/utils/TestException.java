@@ -1,4 +1,4 @@
-package com.tramonti.weather;
+package com.tramonti.weather.utils;
 
 public class TestException extends RuntimeException {
     public TestException() {

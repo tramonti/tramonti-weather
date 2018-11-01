@@ -2,7 +2,7 @@ package com.tramonti.weather.repository;
 
 import com.mongodb.client.DistinctIterable;
 import com.mongodb.client.MongoCollection;
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
 import org.bson.Document;
 import org.junit.Before;
@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -60,7 +59,7 @@ public class BroadcastRepositoryTest {
 
     @Test
     public void findSuccess() {
-        List<BroadcastCity> stubCities = Arrays.asList(StubFactory.getStub("london-11-01", BroadcastCity[].class));
+        List<BroadcastCity> stubCities = Arrays.asList(TestUtils.getStub("london-11-01", BroadcastCity[].class));
         when(mongoTemplate.find(TODAY_CITY_QUERY, BroadcastCity.class)).thenReturn(stubCities);
 
         List<BroadcastCity> result = broadcastRepository.find(LONDON, LocalDate.now());

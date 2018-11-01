@@ -1,6 +1,6 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.service.UserService;
@@ -40,12 +40,12 @@ public class UserControllerTest {
 
     @Test
     public void getAllUsersSuccessTest() throws Exception {
-        List<User> stubUsers = Arrays.asList(StubFactory.getStub("users", User[].class));
+        List<User> stubUsers = Arrays.asList(TestUtils.getStub("users", User[].class));
         when(userService.findAll()).thenReturn(stubUsers);
 
         mockMvc.perform(get("/users")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(StubFactory.formJsonString(stubUsers)));
+                .andExpect(content().json(TestUtils.formJsonString(stubUsers)));
     }
 
     @Test
@@ -59,17 +59,17 @@ public class UserControllerTest {
 
     @Test
     public void findUserByIdSuccessTest() throws Exception {
-        User stubUser = StubFactory.getStub("singleUser", User.class);
+        User stubUser = TestUtils.getStub("singleUser", User.class);
         when(userService.find(stubUser.getId())).thenReturn(stubUser);
 
         mockMvc.perform(get("/users/" + stubUser.getId())).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(StubFactory.formJsonString(stubUser)));
+                .andExpect(content().json(TestUtils.formJsonString(stubUser)));
     }
 
     @Test
     public void findUserByIdNoUserTest() throws Exception {
-        User stubUser = StubFactory.getStub("singleUser", User.class);
+        User stubUser = TestUtils.getStub("singleUser", User.class);
         when(userService.find(stubUser.getId())).thenThrow(new UserException()
                 .setClassName(this.getClass().getName())
                 .setLevel(WARNING)
@@ -84,16 +84,16 @@ public class UserControllerTest {
 
     @Test
     public void createUserSuccessTest() throws Exception {
-        User stubUser = StubFactory.getStub("singleUser", User.class);
+        User stubUser = TestUtils.getStub("singleUser", User.class);
         when(userService.create(any(User.class))).thenReturn(stubUser);
 
         mockMvc.perform(put("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StubFactory.formJsonString(new User()))
+                .content(TestUtils.formJsonString(new User()))
         )
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(StubFactory.formJsonString(stubUser)));
+                .andExpect(content().json(TestUtils.formJsonString(stubUser)));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class UserControllerTest {
 
         mockMvc.perform(put("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StubFactory.formJsonString(new User()))
+                .content(TestUtils.formJsonString(new User()))
         )
                 .andDo(print()).andExpect(status().isForbidden())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -125,7 +125,7 @@ public class UserControllerTest {
 
         mockMvc.perform(put("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StubFactory.formJsonString(new User()))
+                .content(TestUtils.formJsonString(new User()))
         )
                 .andDo(print()).andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -134,21 +134,21 @@ public class UserControllerTest {
 
     @Test
     public void updateUserSuccessTest() throws Exception {
-        User stubUser = StubFactory.getStub("singleUser", User.class);
+        User stubUser = TestUtils.getStub("singleUser", User.class);
         when(userService.update(any(User.class))).thenReturn(stubUser);
 
         mockMvc.perform(post("/users/update")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StubFactory.formJsonString(stubUser))
+                .content(TestUtils.formJsonString(stubUser))
         )
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(StubFactory.formJsonString(stubUser)));
+                .andExpect(content().json(TestUtils.formJsonString(stubUser)));
     }
 
     @Test
     public void updateUserNotExistsTest() throws Exception {
-        User stubUser = StubFactory.getStub("singleUser", User.class);
+        User stubUser = TestUtils.getStub("singleUser", User.class);
         doThrow(new UserException()
                 .setLevel(UserException.Level.WARNING)
                 .setStatus(HttpStatus.FORBIDDEN)
@@ -158,7 +158,7 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/users/update")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StubFactory.formJsonString(stubUser))
+                .content(TestUtils.formJsonString(stubUser))
         )
                 .andDo(print()).andExpect(status().isForbidden())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -167,16 +167,16 @@ public class UserControllerTest {
 
     @Test
     public void deleteUserSuccessTest() throws Exception {
-        User stubUser = StubFactory.getStub("singleUser", User.class);
+        User stubUser = TestUtils.getStub("singleUser", User.class);
         when(userService.delete(any(User.class))).thenReturn(stubUser);
 
         mockMvc.perform(delete("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StubFactory.formJsonString(new User()))
+                .content(TestUtils.formJsonString(new User()))
         )
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(StubFactory.formJsonString(stubUser)));
+                .andExpect(content().json(TestUtils.formJsonString(stubUser)));
     }
 
     @Test
@@ -190,7 +190,7 @@ public class UserControllerTest {
 
         mockMvc.perform(delete("/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StubFactory.formJsonString(new User()))
+                .content(TestUtils.formJsonString(new User()))
         )
                 .andDo(print()).andExpect(status().isForbidden())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))

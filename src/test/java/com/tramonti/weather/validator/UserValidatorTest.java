@@ -1,6 +1,6 @@
 package com.tramonti.weather.validator;
 
-import com.tramonti.weather.StubFactory;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.repository.UserRepository;
@@ -75,7 +75,7 @@ public class UserValidatorTest {
 
     @Test
     public void validateFieldsNotEmptySuccess() {
-        User user = StubFactory.getStub("singleUser", User.class);
+        User user = TestUtils.getStub("singleUser", User.class);
         userValidator.validateFieldsNotEmpty(user, "id", "username", "password");
     }
 
@@ -103,7 +103,7 @@ public class UserValidatorTest {
 
     @Test
     public void validateUserIdExistsSuccess() {
-        when(userRepository.find(any(User.class))).thenReturn(StubFactory.getStub("singleUser", User.class));
+        when(userRepository.find(any(User.class))).thenReturn(TestUtils.getStub("singleUser", User.class));
 
         userValidator.validateUserIdExists(new User());
 
@@ -125,7 +125,7 @@ public class UserValidatorTest {
 
     @Test
     public void validateUserMatchesExistingUserSuccess() {
-        User userStub = StubFactory.getStub("singleUser", User.class);
+        User userStub = TestUtils.getStub("singleUser", User.class);
         when(userRepository.find(userStub)).thenReturn(userStub);
 
         userValidator.validateUserMatchesExistingUser(userStub);
@@ -136,7 +136,7 @@ public class UserValidatorTest {
 
     @Test
     public void validateUserMatchesExistingUserFail() {
-        User userStub = StubFactory.getStub("singleUser", User.class);
+        User userStub = TestUtils.getStub("singleUser", User.class);
         when(userRepository.find(userStub)).thenReturn(null);
         exception.expect(UserException.class);
 
@@ -149,7 +149,7 @@ public class UserValidatorTest {
 
     @Test
     public void validateUserNameExistsSuccess() {
-        when(userRepository.findUserName(any(User.class))).thenReturn(StubFactory.getStub("singleUser", User.class));
+        when(userRepository.findUserName(any(User.class))).thenReturn(TestUtils.getStub("singleUser", User.class));
         exception.expect(UserException.class);
 
         userValidator.validateUserNameExists(new User());
