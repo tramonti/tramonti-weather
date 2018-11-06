@@ -2,9 +2,13 @@ package com.tramonti.weather.repository;
 
 import com.mongodb.client.DistinctIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.result.UpdateResult;
 import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
+import org.bson.BsonObjectId;
+import org.bson.BsonValue;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,8 +16,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -43,7 +49,6 @@ public class BroadcastRepositoryTest {
     @Mock
     private MongoTemplate mongoTemplate;
 
-
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
@@ -53,13 +58,57 @@ public class BroadcastRepositoryTest {
     }
 
     @Test
-    public void save() {
+    public void saveExistingCities() {
+        List<BroadcastCity> citiesStub = Arrays.asList(TestUtils
+                .getStub("broadcasts", BroadcastCity[].class));
+        MongoConverter mongoConverter = mock(MongoConverter.class);
+        UpdateResult updateResult = mock(UpdateResult.class);
 
+        when(mongoTemplate.getConverter()).thenReturn(mongoConverter);
+        doNothing().when(mongoConverter).write(any(BroadcastCity.class), any(Document.class));
+        when(mongoTemplate.upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class))).thenReturn(updateResult);
+        when(mongoTemplate.findOne(any(Query.class), eq(BroadcastCity.class))).thenReturn(new BroadcastCity().setId("00000"));
+        when(updateResult.getUpsertedId()).thenReturn(null);
+
+        broadcastRepository.save(citiesStub);
+
+        verify(mongoTemplate, times(citiesStub.size())).upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class));
+        verify(mongoTemplate, times(citiesStub.size())).findOne(any(Query.class), eq(BroadcastCity.class));
+        verify(mongoTemplate, times(citiesStub.size())).getConverter();
+        verify(mongoConverter, times(citiesStub.size())).write(any(BroadcastCity.class), any(Document.class));
+        verify(updateResult, times(citiesStub.size())).getUpsertedId();
+
+        assertEquals("00000", citiesStub.get(0).getId());
+    }
+
+    @Test
+    public void saveNotExistingCities() {
+        List<BroadcastCity> citiesStub = Arrays.asList(TestUtils
+                .getStub("broadcasts", BroadcastCity[].class));
+        MongoConverter mongoConverter = mock(MongoConverter.class);
+        UpdateResult updateResult = mock(UpdateResult.class);
+        BsonValue bsonValue = new BsonObjectId(new ObjectId("5abe381661731b8cb6bddde0"));
+
+        when(mongoTemplate.getConverter()).thenReturn(mongoConverter);
+        doNothing().when(mongoConverter).write(any(BroadcastCity.class), any(Document.class));
+        when(mongoTemplate.upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class))).thenReturn(updateResult);
+        when(mongoTemplate.findOne(any(Query.class), eq(BroadcastCity.class))).thenReturn(new BroadcastCity().setId("00000"));
+        when(updateResult.getUpsertedId()).thenReturn(bsonValue);
+
+        broadcastRepository.save(citiesStub);
+
+        verify(mongoTemplate, times(citiesStub.size())).upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class));
+        verify(mongoTemplate, times(citiesStub.size())).getConverter();
+        verify(mongoConverter, times(citiesStub.size())).write(any(BroadcastCity.class), any(Document.class));
+        verify(updateResult, times(citiesStub.size() * 2)).getUpsertedId();
+
+        assertEquals("5abe381661731b8cb6bddde0", citiesStub.get(0).getId());
     }
 
     @Test
     public void findSuccess() {
-        List<BroadcastCity> stubCities = Arrays.asList(TestUtils.getStub("london-11-01", BroadcastCity[].class));
+        List<BroadcastCity> stubCities = Arrays.asList(TestUtils
+                .getStub("london-11-01", BroadcastCity[].class));
         when(mongoTemplate.find(TODAY_CITY_QUERY, BroadcastCity.class)).thenReturn(stubCities);
 
         List<BroadcastCity> result = broadcastRepository.find(LONDON, LocalDate.now());
