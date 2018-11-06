@@ -45,7 +45,8 @@ public class WeatherServiceImpl implements WeatherService {
                     .setDescription("city not found")
                     .setName("Illegal City Name")
                     .setLevel(CityNotFoundException.Level.ERROR)
-                    .setStatus(HttpStatus.NOT_FOUND);
+                    .setStatus(HttpStatus.NOT_FOUND)
+                    .setClassName(this.getClass().getName());
         }
         return openWeather;
     }

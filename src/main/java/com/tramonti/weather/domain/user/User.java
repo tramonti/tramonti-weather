@@ -1,12 +1,14 @@
 package com.tramonti.weather.domain.user;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 
 @Data
+@EqualsAndHashCode
 @Document(collection = "users")
 public class User {
 	@Id

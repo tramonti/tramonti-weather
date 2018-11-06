@@ -15,6 +15,7 @@ public class WeatherException extends RuntimeException {
     private String name;
     private String description;
     private Level level;
+    private String className;
 
     public WeatherException setStatus(HttpStatus status) {
         this.status = status;
@@ -38,6 +39,11 @@ public class WeatherException extends RuntimeException {
 
     public WeatherException setLevel(Level level) {
         this.level = level;
+        return this;
+    }
+
+    public WeatherException setClassName(String className){
+        this.className = className;
         return this;
     }
 

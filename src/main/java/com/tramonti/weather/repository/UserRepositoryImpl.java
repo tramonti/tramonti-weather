@@ -12,6 +12,8 @@ import java.util.List;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
+    private static final String USER_COLLECTION = "users";
+
     private MongoTemplate mongoTemplate;
 
     @Autowired
@@ -27,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User find(User user) {
         Query query = new Query(Criteria.where("_id").is(user.getId()));
-        return mongoTemplate.findOne(query, User.class, "users");
+        return mongoTemplate.findOne(query, User.class, USER_COLLECTION);
     }
 
     @Override
@@ -50,13 +52,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void deleteAll() {
-        mongoTemplate.remove(new Query(), "users");
+        mongoTemplate.remove(new Query(), USER_COLLECTION);
     }
 
     @Override
     public User findUserName(User user) {
         Query query = new Query(Criteria.where("username").is(user.getUsername()));
-        return mongoTemplate.findOne(query, User.class, "users");
+        return mongoTemplate.findOne(query, User.class, USER_COLLECTION);
     }
 
 
