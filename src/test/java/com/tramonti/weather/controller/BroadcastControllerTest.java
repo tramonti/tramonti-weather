@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +57,7 @@ public class BroadcastControllerTest {
         mockMvc.perform(get("/broadcast")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"resource\":[\"London\",\"Lviv\",\"Kiev\"],\"links\":[{\"rel\":\"self\",\"href\":\"http://localhost/broadcast\",\"hreflang\":\"eng\",\"media\":null,\"title\":\"getCity\",\"type\":null,\"deprecation\":null},{\"rel\":\"saveOrUpdateCity\",\"href\":\"http://localhost/broadcast/store?city=London\",\"hreflang\":\"eng\",\"media\":null,\"title\":null,\"type\":null,\"deprecation\":null},{\"rel\":\"getCityWeather\",\"href\":\"http://localhost/broadcast/London?date=2018-11-02\",\"hreflang\":\"eng\",\"media\":null,\"title\":null,\"type\":null,\"deprecation\":null}]}"));
+                .andExpect(content().string("{\"resource\":[\"London\",\"Lviv\",\"Kiev\"],\"links\":[{\"rel\":\"self\",\"href\":\"http://localhost/broadcast\",\"hreflang\":\"eng\",\"media\":null,\"title\":\"getCity\",\"type\":null,\"deprecation\":null},{\"rel\":\"saveOrUpdateCity\",\"href\":\"http://localhost/broadcast/store?city=London\",\"hreflang\":\"eng\",\"media\":null,\"title\":null,\"type\":null,\"deprecation\":null},{\"rel\":\"getCityWeather\",\"href\":\"http://localhost/broadcast/London?date=" + LocalDate.now() + "\",\"hreflang\":\"eng\",\"media\":null,\"title\":null,\"type\":null,\"deprecation\":null}]}"));
     }
 
     @Test
