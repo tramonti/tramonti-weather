@@ -8,8 +8,6 @@ import com.google.common.io.Resources;
 import org.apache.log4j.helpers.ISO8601DateFormat;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 public class TestUtils {
     private static final String RESOURCE_PATTERN = "stubs/{CLASS_DIR}/{FILE}.json";
@@ -29,7 +27,7 @@ public class TestUtils {
         Object result;
         try {
             result = mapper.readValue(Resources.getResource(jsonUrl).openStream(), clazz);
-        } catch (IOException e) {
+        }catch (IOException e) {
             throw new TestException(e);
         }
         return (T) result;
@@ -46,7 +44,7 @@ public class TestUtils {
         return resourceUrl;
     }
 
-    public static <T> String formJsonString(T object){
+    public static <T> String formJsonString(T object) {
         try {
             return mapper.writeValueAsString(object);
         }catch (JsonProcessingException e) {

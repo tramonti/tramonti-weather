@@ -38,7 +38,7 @@ public class WeatherServiceImpl implements WeatherService {
         OpenWeather openWeather;
         try {
             openWeather = restTemplate.getForObject(openWeatherForecastURL, OpenWeather.class);
-        } catch (Exception e) {
+        }catch (Exception e) {
             NDC.push("cityName = " + cityName);
             NDC.push("exception = " + e.toString());
             throw new CityNotFoundException()

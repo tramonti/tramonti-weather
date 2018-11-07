@@ -1,4 +1,3 @@
-
 package com.tramonti.weather.domain.weather;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -8,7 +7,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@Getter @Setter
+@Getter
+@Setter
 public class Coordinates {
 
     @JsonAlias("lat")
@@ -26,8 +26,8 @@ public class Coordinates {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj == null) return false;
-        if(getClass() != obj.getClass()) return false;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         final Coordinates other = (Coordinates) obj;
         return new EqualsBuilder()
                 .append(this.latitude, other.latitude)

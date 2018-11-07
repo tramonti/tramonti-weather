@@ -1,4 +1,3 @@
-
 package com.tramonti.weather.domain.weather;
 
 import lombok.Data;

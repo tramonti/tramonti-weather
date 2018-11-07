@@ -1,9 +1,9 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.CityNotFoundException;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.service.WeatherService;
+import com.tramonti.weather.utils.TestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(WeatherController.class)

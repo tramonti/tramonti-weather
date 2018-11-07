@@ -1,9 +1,9 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.repository.UserRepository;
+import com.tramonti.weather.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

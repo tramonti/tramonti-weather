@@ -1,7 +1,7 @@
 package com.tramonti.weather.repository;
 
-import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.user.User;
+import com.tramonti.weather.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class UserRepositoryTest {
@@ -87,7 +87,7 @@ public class UserRepositoryTest {
     @Test
     public void deleteAll() {
         userRepository.deleteAll();
-        verify(mongoTemplate, times(1)).remove(new Query(),"users");
+        verify(mongoTemplate, times(1)).remove(new Query(), "users");
         verifyNoMoreInteractions(mongoTemplate);
     }
 

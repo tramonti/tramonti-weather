@@ -1,9 +1,9 @@
 package com.tramonti.weather.controller;
 
-import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.service.UserService;
+import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.validator.UserValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +22,9 @@ import java.util.List;
 import static com.tramonti.weather.domain.exception.WeatherException.Level.WARNING;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)

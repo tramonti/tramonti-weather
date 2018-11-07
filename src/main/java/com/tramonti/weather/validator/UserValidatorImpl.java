@@ -30,7 +30,7 @@ public class UserValidatorImpl implements UserValidator {
         Set<ConstraintViolation<User>> violations = beanValidator.validate(user);
         if (violations.size() != 0) {
             StringBuilder descriptionBuilder = new StringBuilder();
-            for (ConstraintViolation<User> v : violations) {
+            for(ConstraintViolation<User> v : violations) {
                 descriptionBuilder.append(v.getMessage() + " ");
             }
             throw new UserException()
@@ -48,7 +48,7 @@ public class UserValidatorImpl implements UserValidator {
 
         if (violations.size() != 0) {
             StringJoiner descriptionJoiner = new StringJoiner(" | ", "[", "]");
-            for (String v : violations) {
+            for(String v : violations) {
                 descriptionJoiner.add(v);
             }
             throw new UserException()
@@ -63,7 +63,7 @@ public class UserValidatorImpl implements UserValidator {
     private Set<String> getViolations(User user, String[] fields) {
         Set<String> violations = new TreeSet<>();
 
-        for (String fieldName : fields) {
+        for(String fieldName : fields) {
             Field field = getField(fieldName);
             if (isNotEmptyAnnotated(field) && isStringType(field)) {
                 String fieldString = (String) getFiledValue(user, field);
@@ -80,8 +80,8 @@ public class UserValidatorImpl implements UserValidator {
         try {
             Class<?> clazz = User.class;
             return clazz.getDeclaredField(fieldName);
-        } catch (NoSuchFieldException e) {
-            NDC.push("[exception = " + e.toString()+"]");
+        }catch (NoSuchFieldException e) {
+            NDC.push("[exception = " + e.toString() + "]");
             throw new UserException()
                     .setLevel(UserException.Level.ERROR)
                     .setStatus(HttpStatus.CONFLICT)
@@ -104,8 +104,8 @@ public class UserValidatorImpl implements UserValidator {
         try {
             field.setAccessible(true);
             result = field.get(user);
-        } catch (IllegalAccessException e) {
-            NDC.push("[exception = " + e.toString()+"]");
+        }catch (IllegalAccessException e) {
+            NDC.push("[exception = " + e.toString() + "]");
             throw new UserException()
                     .setLevel(UserException.Level.ERROR)
                     .setStatus(HttpStatus.CONFLICT)

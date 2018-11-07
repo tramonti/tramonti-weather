@@ -1,8 +1,8 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.CityNotFoundException;
 import com.tramonti.weather.domain.weather.OpenWeather;
+import com.tramonti.weather.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class WeatherServiceTest {

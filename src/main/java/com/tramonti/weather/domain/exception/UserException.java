@@ -1,4 +1,4 @@
 package com.tramonti.weather.domain.exception;
 
-public class UserException extends WeatherException{
+public class UserException extends WeatherException {
 }

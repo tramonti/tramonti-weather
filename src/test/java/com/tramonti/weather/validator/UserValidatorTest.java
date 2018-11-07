@@ -1,9 +1,9 @@
 package com.tramonti.weather.validator;
 
-import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.exception.UserException;
 import com.tramonti.weather.domain.user.User;
 import com.tramonti.weather.repository.UserRepository;
+import com.tramonti.weather.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +15,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -87,7 +86,7 @@ public class UserValidatorTest {
         user.setPassword(null);
         exception.expect(UserException.class);
 
-        userValidator.validateFieldsNotEmpty(user, "id","username", "password");
+        userValidator.validateFieldsNotEmpty(user, "id", "username", "password");
     }
 
     @Test
@@ -98,7 +97,7 @@ public class UserValidatorTest {
         user.setPassword("");
         exception.expect(UserException.class);
 
-        userValidator.validateFieldsNotEmpty(user, "id","username", "password");
+        userValidator.validateFieldsNotEmpty(user, "id", "username", "password");
     }
 
     @Test

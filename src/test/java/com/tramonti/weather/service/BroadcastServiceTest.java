@@ -1,9 +1,9 @@
 package com.tramonti.weather.service;
 
-import com.tramonti.weather.utils.TestUtils;
 import com.tramonti.weather.domain.broadcast.BroadcastCity;
 import com.tramonti.weather.domain.weather.OpenWeather;
 import com.tramonti.weather.repository.BroadcastRepository;
+import com.tramonti.weather.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

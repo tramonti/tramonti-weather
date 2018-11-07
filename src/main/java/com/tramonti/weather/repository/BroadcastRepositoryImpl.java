@@ -72,7 +72,7 @@ public class BroadcastRepositoryImpl implements BroadcastRepository {
         if (result.getUpsertedId() != null) {
             id = result.getUpsertedId().asObjectId().getValue().toString();
             city.setId(id);
-        } else {
+        }else {
             id = mongoTemplate.findOne(query, BroadcastCity.class).getId();
         }
         city.setId(id);

@@ -42,7 +42,7 @@ public class WeatherException extends RuntimeException {
         return this;
     }
 
-    public WeatherException setClassName(String className){
+    public WeatherException setClassName(String className) {
         this.className = className;
         return this;
     }
