@@ -319,33 +319,4 @@
     "icon": "03d",
     "dateTime": "2018-11-06T15:00:00"
   }
-],
-"links": [
-{
-"rel": "self",
-"href": "http://localhost:8080/broadcast/store?city=london",
-"hreflang": null,
-"media": null,
-"title": null,
-"type": null,
-"deprecation": null
-},
-{
-"rel": "getTodayCityWeather",
-"href": "http://localhost:8080/broadcast/London?date=2018-11-01",
-"hreflang": null,
-"media": null,
-"title": null,
-"type": null,
-"deprecation": null
-},
-{
-"rel": "getCompleteCityWeather",
-"href": "http://localhost:8080/weather?city=london",
-"hreflang": null,
-"media": null,
-"title": null,
-"type": null,
-"deprecation": null
-}
 ]
