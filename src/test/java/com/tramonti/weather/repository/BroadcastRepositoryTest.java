@@ -92,7 +92,6 @@ public class BroadcastRepositoryTest {
         when(mongoTemplate.getConverter()).thenReturn(mongoConverter);
         doNothing().when(mongoConverter).write(any(BroadcastCity.class), any(Document.class));
         when(mongoTemplate.upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class))).thenReturn(updateResult);
-        when(mongoTemplate.findOne(any(Query.class), eq(BroadcastCity.class))).thenReturn(new BroadcastCity().setId("00000"));
         when(updateResult.getUpsertedId()).thenReturn(bsonValue);
 
         broadcastRepository.save(citiesStub);
