@@ -39,7 +39,7 @@ public class UserValidatorTest {
     public ExpectedException exception = ExpectedException.none();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         userValidator = new UserValidatorImpl();
         ReflectionTestUtils.setField(userValidator, "userRepository", userRepository);
         ReflectionTestUtils.setField(userValidator, "beanValidator", beanValidator);
@@ -102,7 +102,8 @@ public class UserValidatorTest {
 
     @Test
     public void validateUserIdExistsSuccess() {
-        when(userRepository.find(any(User.class))).thenReturn(TestUtils.getStub("singleUser", User.class));
+        when(userRepository.find(any(User.class)))
+                .thenReturn(TestUtils.getStub("singleUser", User.class));
 
         userValidator.validateUserIdExists(new User());
 
@@ -148,7 +149,8 @@ public class UserValidatorTest {
 
     @Test
     public void validateUserNameExistsSuccess() {
-        when(userRepository.findUserName(any(User.class))).thenReturn(TestUtils.getStub("singleUser", User.class));
+        when(userRepository.findUserName(any(User.class))).thenReturn(
+                TestUtils.getStub("singleUser", User.class));
         exception.expect(UserException.class);
 
         userValidator.validateUserNameExists(new User());

@@ -37,15 +37,20 @@ public class WeatherServiceTest {
     public void setUp() {
         weatherService = new WeatherServiceImpl();
         ReflectionTestUtils.setField(weatherService, "restTemplate", restTemplate);
-        ReflectionTestUtils.setField(weatherService, "weatherUrl", "http://api.openweathermap.org/data/2.5/forecast");
-        ReflectionTestUtils.setField(weatherService, "APIKey", "713d9a6a9e5940714f0f60d0f56a095d");
+        ReflectionTestUtils.setField(weatherService, "weatherUrl",
+                "http://api.openweathermap.org/data/2.5/forecast");
+        ReflectionTestUtils.setField(weatherService, "APIKey",
+                "713d9a6a9e5940714f0f60d0f56a095d");
         ReflectionTestUtils.setField(weatherService, "temperatureUnits", "metric");
     }
 
     @Test
     public void getWeatherSuccess() throws URISyntaxException {
         OpenWeather weatherStub = TestUtils.getStub("London", OpenWeather.class);
-        URI uri = new URI("http://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&APPID=713d9a6a9e5940714f0f60d0f56a095d");
+        URI uri = new URI("http://api.openweathermap.org/data/2.5/forecast?" +
+                "q=London&" +
+                "units=metric&" +
+                "APPID=713d9a6a9e5940714f0f60d0f56a095d");
         when(restTemplate.getForObject(uri, OpenWeather.class))
                 .thenReturn(weatherStub);
 
@@ -61,8 +66,12 @@ public class WeatherServiceTest {
 
     @Test
     public void getWeatherFail() throws URISyntaxException {
-        URI uri = new URI("http://api.openweathermap.org/data/2.5/forecast?q=LVL&units=metric&APPID=713d9a6a9e5940714f0f60d0f56a095d");
-        when(restTemplate.getForObject(uri, OpenWeather.class)).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        URI uri = new URI("http://api.openweathermap.org/data/2.5/forecast?" +
+                "q=LVL&" +
+                "units=metric&" +
+                "APPID=713d9a6a9e5940714f0f60d0f56a095d");
+        when(restTemplate.getForObject(uri, OpenWeather.class))
+                .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
         exception.expect(CityNotFoundException.class);
 
         weatherService.getWeather("LVL");

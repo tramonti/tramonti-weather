@@ -70,9 +70,12 @@ public class BroadcastController {
 
         HateaosResource<List<BroadcastCity>> resources = new HateaosResource<>(broadcastCities);
         resources.add(linkTo(methodOn(BroadcastController.class).storeCity(cityName)).withSelfRel());
-        resources.add(linkTo(methodOn(BroadcastController.class).getCityByDay(openWeather.getCity().getName(), LocalDate.now()))
+        resources.add(linkTo(methodOn(BroadcastController.class).getCityByDay(
+                openWeather.getCity().getName(),
+                LocalDate.now()))
                 .withRel("getTodayCityWeather"));
-        resources.add(linkTo(methodOn(WeatherController.class).getWeather(cityName)).withRel("getCompleteCityWeather"));
+        resources.add(linkTo(methodOn(WeatherController.class).getWeather(cityName))
+                .withRel("getCompleteCityWeather"));
         return resources;
     }
 
@@ -88,10 +91,12 @@ public class BroadcastController {
         boolean nextDayPresent = broadcastService.exists(cityName, date.plusDays(1));
         boolean prevDayPresent = broadcastService.exists(cityName, date.minusDays(1));
         if (nextDayPresent) {
-            resource.add(linkTo(methodOn(BroadcastController.class).getCityByDay(cityName, date.plusDays(1))).withRel("nextDay"));
+            resource.add(linkTo(methodOn(BroadcastController.class).getCityByDay(cityName, date.plusDays(1)))
+                    .withRel("nextDay"));
         }
         if (prevDayPresent) {
-            resource.add(linkTo(methodOn(BroadcastController.class).getCityByDay(cityName, date.minusDays(1))).withRel("prevDay"));
+            resource.add(linkTo(methodOn(BroadcastController.class).getCityByDay(cityName, date.minusDays(1)))
+                    .withRel("prevDay"));
         }
         return resource;
     }

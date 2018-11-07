@@ -50,6 +50,8 @@ public class WeatherControllerTest {
                 .setStatus(HttpStatus.NOT_FOUND));
         mockMvc.perform(get("/weather?city=Lsad")).andDo(print()).andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"status\":\"404\",\"name\":\"Illegal City Name\",\"description\":\"city not found\"}"));
+                .andExpect(content().string("{\"status\":\"404\"," +
+                        "\"name\":\"Illegal City Name\"," +
+                        "\"description\":\"city not found\"}"));
     }
 }

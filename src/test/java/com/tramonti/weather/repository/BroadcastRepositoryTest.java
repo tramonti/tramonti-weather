@@ -41,7 +41,9 @@ public class BroadcastRepositoryTest {
     static {
         LocalDateTime dateMidnight = LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT);
         LocalDateTime nextDateMidnight = dateMidnight.plusDays(1);
-        TODAY_CITY_QUERY = new Query(Criteria.where("city").is(LONDON).and("dateTime").gte(dateMidnight).lt(nextDateMidnight));
+        TODAY_CITY_QUERY = new Query(Criteria.where("city")
+                .is(LONDON)
+                .and("dateTime").gte(dateMidnight).lt(nextDateMidnight));
     }
 
     private BroadcastRepository broadcastRepository;
@@ -66,13 +68,16 @@ public class BroadcastRepositoryTest {
 
         when(mongoTemplate.getConverter()).thenReturn(mongoConverter);
         doNothing().when(mongoConverter).write(any(BroadcastCity.class), any(Document.class));
-        when(mongoTemplate.upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class))).thenReturn(updateResult);
-        when(mongoTemplate.findOne(any(Query.class), eq(BroadcastCity.class))).thenReturn(new BroadcastCity().setId("00000"));
+        when(mongoTemplate.upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class)))
+                .thenReturn(updateResult);
+        when(mongoTemplate.findOne(any(Query.class), eq(BroadcastCity.class)))
+                .thenReturn(new BroadcastCity().setId("00000"));
         when(updateResult.getUpsertedId()).thenReturn(null);
 
         broadcastRepository.save(citiesStub);
 
-        verify(mongoTemplate, times(citiesStub.size())).upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class));
+        verify(mongoTemplate, times(citiesStub.size())).upsert(
+                any(Query.class), any(Update.class), eq(BroadcastCity.class));
         verify(mongoTemplate, times(citiesStub.size())).findOne(any(Query.class), eq(BroadcastCity.class));
         verify(mongoTemplate, times(citiesStub.size())).getConverter();
         verify(mongoConverter, times(citiesStub.size())).write(any(BroadcastCity.class), any(Document.class));
@@ -91,12 +96,14 @@ public class BroadcastRepositoryTest {
 
         when(mongoTemplate.getConverter()).thenReturn(mongoConverter);
         doNothing().when(mongoConverter).write(any(BroadcastCity.class), any(Document.class));
-        when(mongoTemplate.upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class))).thenReturn(updateResult);
+        when(mongoTemplate.upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class)))
+                .thenReturn(updateResult);
         when(updateResult.getUpsertedId()).thenReturn(bsonValue);
 
         broadcastRepository.save(citiesStub);
 
-        verify(mongoTemplate, times(citiesStub.size())).upsert(any(Query.class), any(Update.class), eq(BroadcastCity.class));
+        verify(mongoTemplate, times(citiesStub.size())).upsert(
+                any(Query.class), any(Update.class), eq(BroadcastCity.class));
         verify(mongoTemplate, times(citiesStub.size())).getConverter();
         verify(mongoConverter, times(citiesStub.size())).write(any(BroadcastCity.class), any(Document.class));
         verify(updateResult, times(citiesStub.size() * 2)).getUpsertedId();

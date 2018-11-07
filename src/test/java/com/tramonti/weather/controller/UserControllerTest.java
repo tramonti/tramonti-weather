@@ -44,7 +44,8 @@ public class UserControllerTest {
         List<User> stubUsers = Arrays.asList(TestUtils.getStub("users", User[].class));
         when(userService.findAll()).thenReturn(stubUsers);
 
-        mockMvc.perform(get("/users")).andDo(print()).andExpect(status().isOk())
+        mockMvc.perform(get("/users")).andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(TestUtils.formJsonString(stubUsers)));
     }
@@ -53,7 +54,8 @@ public class UserControllerTest {
     public void getAllUsersIsEmptyTest() throws Exception {
         when(userService.findAll()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/users")).andDo(print()).andExpect(status().isOk())
+        mockMvc.perform(get("/users")).andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("[]"));
     }
@@ -63,7 +65,8 @@ public class UserControllerTest {
         User stubUser = TestUtils.getStub("singleUser", User.class);
         when(userService.find(stubUser.getId())).thenReturn(stubUser);
 
-        mockMvc.perform(get("/users/" + stubUser.getId())).andDo(print()).andExpect(status().isOk())
+        mockMvc.perform(get("/users/" + stubUser.getId())).andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(TestUtils.formJsonString(stubUser)));
     }
@@ -78,9 +81,12 @@ public class UserControllerTest {
                 .setDescription("user with such id does not exist")
                 .setStatus(HttpStatus.BAD_REQUEST));
 
-        mockMvc.perform(get("/users/" + stubUser.getId())).andDo(print()).andExpect(status().isBadRequest())
+        mockMvc.perform(get("/users/" + stubUser.getId())).andDo(print())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"status\":\"400\",\"name\":\"No matching Id\",\"description\":\"user with such id does not exist\"}"));
+                .andExpect(content().string("{\"status\":\"400\"," +
+                        "\"name\":\"No matching Id\"," +
+                        "\"description\":\"user with such id does not exist\"}"));
     }
 
     @Test
@@ -112,7 +118,9 @@ public class UserControllerTest {
         )
                 .andDo(print()).andExpect(status().isForbidden())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"status\":\"403\",\"name\":\"user already exists\",\"description\":\"user with such username already exists\"}"));
+                .andExpect(content().string("{\"status\":\"403\"," +
+                        "\"name\":\"user already exists\"," +
+                        "\"description\":\"user with such username already exists\"}"));
     }
 
     @Test
@@ -130,7 +138,9 @@ public class UserControllerTest {
         )
                 .andDo(print()).andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"status\":\"400\",\"name\":\"business rules violation\",\"description\":\"some fields are empty\"}"));
+                .andExpect(content().string("{\"status\":\"400\"," +
+                        "\"name\":\"business rules violation\"," +
+                        "\"description\":\"some fields are empty\"}"));
     }
 
     @Test
@@ -163,7 +173,9 @@ public class UserControllerTest {
         )
                 .andDo(print()).andExpect(status().isForbidden())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"status\":\"403\",\"name\":\"user does not exist\",\"description\":\"there is no user with id 5bd3052361560103a88ede1d\"}"));
+                .andExpect(content().string("{\"status\":\"403\"," +
+                        "\"name\":\"user does not exist\"," +
+                        "\"description\":\"there is no user with id 5bd3052361560103a88ede1d\"}"));
     }
 
     @Test
@@ -195,6 +207,8 @@ public class UserControllerTest {
         )
                 .andDo(print()).andExpect(status().isForbidden())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string("{\"status\":\"403\",\"name\":\"user does not exist\",\"description\":\"entered user does not match existing user\"}"));
+                .andExpect(content().string("{\"status\":\"403\"," +
+                        "\"name\":\"user does not exist\"," +
+                        "\"description\":\"entered user does not match existing user\"}"));
     }
 }

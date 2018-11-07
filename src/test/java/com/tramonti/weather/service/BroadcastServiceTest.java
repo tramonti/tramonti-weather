@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -52,7 +53,8 @@ public class BroadcastServiceTest {
                         .setTemperature(10.34)
                         .setDescription("light rain")
                         .setIcon("10d")
-                        .setDateTime(LocalDateTime.of(LocalDate.of(2018, 10, 26), LocalTime.NOON)),
+                        .setDateTime(LocalDateTime.of(
+                                LocalDate.of(2018, 10, 26), LocalTime.NOON)),
                 result.get(1));
     }
 
@@ -66,7 +68,7 @@ public class BroadcastServiceTest {
     @Test
     public void findBroadcastCityListByNameAndDateInDBTest() {
         when(broadcastRepository.find("London", LocalDate.now()))
-                .thenReturn(Arrays.asList(new BroadcastCity()
+                .thenReturn(Collections.singletonList(new BroadcastCity()
                         .setId("someId123")
                         .setCity("London")
                         .setDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.NOON))));
@@ -102,7 +104,7 @@ public class BroadcastServiceTest {
         List<String> result = broadcastService.findAvailableCities();
         assertNotNull(result);
         assertEquals(3, result.size());
-        assertTrue("London".equals(result.get(0)));
+        assertEquals("London", result.get(0));
         verify(broadcastRepository, atMost(1)).getAvailableCities();
     }
 }
